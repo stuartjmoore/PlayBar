@@ -15,6 +15,7 @@
 		1724F7E815D5BBFB00EFE31B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1724F7E615D5BBFB00EFE31B /* MainMenu.xib */; };
 		1724F7F115D5C07E00EFE31B /* statusBarItemImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1724F7EF15D5C07E00EFE31B /* statusBarItemImage.png */; };
 		1724F7F215D5C07E00EFE31B /* statusBarItemImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1724F7F015D5C07E00EFE31B /* statusBarItemImage@2x.png */; };
+		17AC521B15D5D2A4003956D0 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC521A15D5D2A4003956D0 /* QTKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		1724F7E715D5BBFB00EFE31B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		1724F7EF15D5C07E00EFE31B /* statusBarItemImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statusBarItemImage.png; path = Resources/statusBarItemImage.png; sourceTree = SOURCE_ROOT; };
 		1724F7F015D5C07E00EFE31B /* statusBarItemImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarItemImage@2x.png"; path = "Resources/statusBarItemImage@2x.png"; sourceTree = SOURCE_ROOT; };
+		17AC521A15D5D2A4003956D0 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17AC521B15D5D2A4003956D0 /* QTKit.framework in Frameworks */,
 				1724F7D215D5BBFB00EFE31B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,6 +70,7 @@
 		1724F7D015D5BBFB00EFE31B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				17AC521A15D5D2A4003956D0 /* QTKit.framework */,
 				1724F7D115D5BBFB00EFE31B /* Cocoa.framework */,
 				1724F7D315D5BBFB00EFE31B /* Other Frameworks */,
 			);
@@ -304,6 +308,7 @@
 				1724F7ED15D5BBFB00EFE31B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

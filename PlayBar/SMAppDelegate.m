@@ -10,21 +10,37 @@
 
 @implementation SMAppDelegate
 
-@synthesize popover = _popover;
+@synthesize statusItem = _statusItem, statusMenu = _statusMenu;
+@synthesize popover = _popover, player = _player;
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
-    myStatusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    [myStatusItem setHighlightMode:YES];
-    [myStatusItem setToolTip:@"PlayBar\nWeekend Confirmed - Ep. 125 - 08/10/2012"];
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    [self.statusItem setHighlightMode:YES];
+    [self.statusItem setToolTip:@"PlayBar\nWeekend Confirmed - Ep. 125 - 08/10/2012"];
     
     //[myStatusItem setTitle:@"Weekend Confirmed - Ep. 125 - 08/10/2012"];
-    [myStatusItem setImage:[NSImage imageNamed:@"statusBarItemImage.png"]];
+    [self.statusItem setImage:[NSImage imageNamed:@"statusBarItemImage.png"]];
     //[myStatusItem setMenu:myStatusMenu];
     
-    [myStatusItem setTarget:self];
-    [myStatusItem setAction:@selector(click:)];
-    [myStatusItem setDoubleAction:@selector(doubleClick:)];
+    [self.statusItem setTarget:self];
+    [self.statusItem setAction:@selector(click:)];
+    [self.statusItem setDoubleAction:@selector(doubleClick:)];
+    
+    QTMovie *file = [QTMovie movieWithURL:[NSURL URLWithString:@"http://d.ahoy.co/redirect.mp3/fly.5by5.tv/audio/broadcasts/buildanalyze/2012/buildanalyze-089.mp3"] error:nil];
+    if(file)
+    {
+        self.player = file;
+        [self.player autoplay];
+    }
+}
+
+- (IBAction)togglePlayPause:(id)sender
+{
+    if(self.player.rate)
+        [self.player stop];
+    else
+        [self.player play];
 }
 
 - (void)click:(id)sender

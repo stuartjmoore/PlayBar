@@ -7,13 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <QTKit/QTKit.h>
 
 @interface SMAppDelegate : NSObject <NSApplicationDelegate>
-{
-    NSStatusItem *myStatusItem;
-    IBOutlet NSMenu *myStatusMenu;
-}
+
+@property (strong, nonatomic) NSStatusItem *statusItem;
+@property (strong, nonatomic) IBOutlet NSMenu *statusMenu;
 
 @property (strong, nonatomic) IBOutlet NSPanel *popover;
+@property (strong, nonatomic) QTMovie *player;
+
+- (IBAction)togglePlayPause:(id)sender;
 
 @end

@@ -177,7 +177,6 @@
 									<string key="NSFrame">{{200, 0}, {165, 17}}</string>
 									<reference key="NSSuperview" ref="763185171"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:3944</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="229200343">
@@ -381,19 +380,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">myStatusMenu</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="949615727"/>
-					</object>
-					<int key="connectionID">541</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">popover</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="166802127"/>
 					</object>
 					<int key="connectionID">557</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">statusMenu</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="949615727"/>
+					</object>
+					<int key="connectionID">579</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">togglePlayPause:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="429827617"/>
+					</object>
+					<int key="connectionID">580</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -673,7 +680,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">578</int>
+			<int key="maxID">580</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -681,17 +688,17 @@
 					<string key="className">SMAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="myStatusMenu">NSMenu</string>
 						<string key="popover">NSPanel</string>
+						<string key="statusMenu">NSMenu</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="myStatusMenu">
-							<string key="name">myStatusMenu</string>
-							<string key="candidateClassName">NSMenu</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="popover">
 							<string key="name">popover</string>
 							<string key="candidateClassName">NSPanel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="statusMenu">
+							<string key="name">statusMenu</string>
+							<string key="candidateClassName">NSMenu</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
