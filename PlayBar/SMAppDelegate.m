@@ -32,6 +32,7 @@
     NSLog(@"click %@", sender);
     
     NSRect frame = [[[NSApp currentEvent] window] frame];
+    NSSize screenSize = [[self.popover screen] frame].size;
     
     if(self.popover.isVisible)
     {
@@ -39,14 +40,11 @@
     }
     else
     {
-        frame.origin.x += (frame.size.width - self.popover.frame.size.width)/2;
         frame.origin.y -= self.popover.frame.size.height;
-        
-        NSSize screenSize = [[self.popover screen] frame].size;
+        frame.origin.x += (frame.size.width - self.popover.frame.size.width)/2;
         
         if(screenSize.width < frame.origin.x + self.popover.frame.size.width)
             frame.origin.x = screenSize.width - self.popover.frame.size.width - 10;
-        
         
         [self.popover setFrameOrigin:frame.origin];
         
