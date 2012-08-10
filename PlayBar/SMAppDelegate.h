@@ -14,4 +14,6 @@
     IBOutlet NSMenu *myStatusMenu;
 }
 
+@property (strong, nonatomic) IBOutlet NSPanel *popover;
+
 @end
