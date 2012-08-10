@@ -10,11 +10,13 @@
 
 @implementation SMAppDelegate
 
-@synthesize window = _window;
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
-    // Insert code here to initialize your application
+    myStatusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    [myStatusItem setHighlightMode:YES];
+    
+    //[myStatusItem setTitle:@"Weekend Confirmed - Ep. 125 - 08/10/2012"];
+    [myStatusItem setImage:[NSImage imageNamed:@"statusBarItemImage.png"]];
+    [myStatusItem setMenu:myStatusMenu];
 }
-
 @end
