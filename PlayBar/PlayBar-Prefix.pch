@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'PlayBar' target in the 'PlayBar' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
