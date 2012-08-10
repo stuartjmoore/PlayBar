@@ -15,7 +15,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
     myStatusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    //[myStatusItem setHighlightMode:YES];
+    [myStatusItem setHighlightMode:YES];
     [myStatusItem setToolTip:@"PlayBar\nWeekend Confirmed - Ep. 125 - 08/10/2012"];
     
     //[myStatusItem setTitle:@"Weekend Confirmed - Ep. 125 - 08/10/2012"];
