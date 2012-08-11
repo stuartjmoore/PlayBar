@@ -146,7 +146,7 @@
 		1724F7C415D5BBFB00EFE31B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 1724F7C715D5BBFB00EFE31B /* Build configuration list for PBXProject "PlayBar" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -270,6 +270,7 @@
 		1724F7EC15D5BBFB00EFE31B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayBar/PlayBar-Prefix.pch";
 				INFOPLIST_FILE = "PlayBar/PlayBar-Info.plist";
@@ -281,6 +282,7 @@
 		1724F7ED15D5BBFB00EFE31B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayBar/PlayBar-Prefix.pch";
 				INFOPLIST_FILE = "PlayBar/PlayBar-Info.plist";

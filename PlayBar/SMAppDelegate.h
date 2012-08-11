@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet NSPanel *popover;
 @property (strong, nonatomic) QTMovie *player;
 
+- (IBAction)openFile:(id)sender;
 - (IBAction)togglePlayPause:(id)sender;
 
 @end

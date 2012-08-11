@@ -19,20 +19,44 @@
     [self.statusItem setHighlightMode:YES];
     [self.statusItem setToolTip:@"PlayBar\nWeekend Confirmed - Ep. 125 - 08/10/2012"];
     
-    //[myStatusItem setTitle:@"Weekend Confirmed - Ep. 125 - 08/10/2012"];
     [self.statusItem setImage:[NSImage imageNamed:@"statusBarItemImage.png"]];
-    //[myStatusItem setMenu:myStatusMenu];
     
     [self.statusItem setTarget:self];
     [self.statusItem setAction:@selector(click:)];
     [self.statusItem setDoubleAction:@selector(doubleClick:)];
     
-    QTMovie *file = [QTMovie movieWithURL:[NSURL URLWithString:@"http://d.ahoy.co/redirect.mp3/fly.5by5.tv/audio/broadcasts/buildanalyze/2012/buildanalyze-089.mp3"] error:nil];
+    /*QTMovie *file = [QTMovie movieWithURL:[NSURL URLWithString:@"http://d.ahoy.co/redirect.mp3/fly.5by5.tv/audio/broadcasts/buildanalyze/2012/buildanalyze-089.mp3"] error:nil];
     if(file)
     {
         self.player = file;
         [self.player autoplay];
-    }
+    }*/
+}
+
+- (IBAction)openFile:(id)sender
+{
+    NSOpenPanel *panel;
+    
+    panel = [NSOpenPanel openPanel];
+    [panel setFloatingPanel:YES];
+    [panel setCanChooseDirectories:YES];
+    [panel setCanChooseFiles:YES];
+    [panel setAllowsMultipleSelection:NO];
+    [panel setAllowedFileTypes:[NSArray arrayWithObject:@"mp3"]];
+
+    [panel beginSheetModalForWindow:self.popover completionHandler:^(NSInteger result)
+    {
+        if(result == NSFileHandlingPanelOKButton)
+        {
+            QTMovie *file = [QTMovie movieWithURL:panel.URL error:nil];
+            
+            if(file)
+            {
+                self.player = file;
+                [self.player autoplay];
+            }
+        }
+    }];
 }
 
 - (IBAction)togglePlayPause:(id)sender
@@ -45,8 +69,6 @@
 
 - (void)click:(id)sender
 {
-    NSLog(@"click %@", sender);
-    
     NSRect frame = [[[NSApp currentEvent] window] frame];
     NSSize screenSize = [[self.popover screen] frame].size;
     
@@ -70,7 +92,6 @@
 }
 - (void)doubleClick:(id)sender
 {
-    NSLog(@"doubleClick %@", sender);
 }
 
 @end
