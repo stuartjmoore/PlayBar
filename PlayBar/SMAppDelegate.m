@@ -27,14 +27,6 @@
     
     [self.statusItem setTarget:self];
     [self.statusItem setAction:@selector(click:)];
-    //[self.statusItem setDoubleAction:@selector(doubleClick:)];
-    
-    /*QTMovie *file = [QTMovie movieWithURL:[NSURL URLWithString:@"http://d.ahoy.co/redirect.mp3/fly.5by5.tv/audio/broadcasts/buildanalyze/2012/buildanalyze-089.mp3"] error:nil];
-    if(file)
-    {
-        self.player = file;
-        [self.player autoplay];
-    }*/
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(movieRateChanged:)
@@ -65,13 +57,23 @@
     self.timeElapsedLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.currentTime.timeValue];
     self.timeRemainingLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue];
     self.albumArtView.image = self.player.posterImage;
-    
+    /*
+    NSLog(@"%@", self.player.commonMetadata);
+    NSLog(@"%@", self.player.availableMetadataFormats);
+    */
+    for(QTMetadataItem *item in self.player.commonMetadata)
+    {
+        if([(NSString*)item.key isEqualToString:@"title"])
+            self.titleLabel.stringValue = item.stringValue;
+        else if([(NSString*)item.key isEqualToString:@"albumName"])
+            self.albumLabel.stringValue = item.stringValue;
+        else if([(NSString*)item.key isEqualToString:@"artist"])
+            self.artistLabel.stringValue = item.stringValue;
+    }
 }
 
 - (void)updateSlider:(id)timer
 {
-    NSLog(@"hi");
-    
     self.seekbar.floatValue = self.player.currentTime.timeValue;
     
     self.timeElapsedLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.currentTime.timeValue];
@@ -134,9 +136,6 @@
         [self.popover makeKeyAndOrderFront:self];
         [self.popover setIsVisible:YES];
     }
-}
-- (void)doubleClick:(id)sender
-{
 }
 
 @end
