@@ -41,6 +41,7 @@
     {
         self.playPauseButton.title = @"Pause";
         
+        [self.timer invalidate];
         self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(updateSlider:) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:(NSString*)kCFRunLoopCommonModes];
     }
@@ -50,6 +51,10 @@
         
         [self.timer invalidate];
     }
+    
+    self.titleLabel.stringValue = @"";
+    self.albumLabel.stringValue = @"";
+    self.artistLabel.stringValue = @"";
     
     self.seekbar.minValue = 0;
     self.seekbar.maxValue = self.player.duration.timeValue;
@@ -153,6 +158,11 @@
         [self.player play];
 }
 
+- (IBAction)slideSeekbar:(id)sender
+{
+    self.player.currentTime = QTMakeTime(self.seekbar.floatValue, self.player.duration.timeScale);
+}
+
 - (void)click:(id)sender
 {
     NSRect frame = [[[NSApp currentEvent] window] frame];
@@ -172,8 +182,8 @@
         
         [self.popover setFrameOrigin:frame.origin];
         
-        [self.popover makeKeyAndOrderFront:self];
         [self.popover setIsVisible:YES];
+        [self.popover makeKeyAndOrderFront:self];
     }
 }
 

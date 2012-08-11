@@ -34,5 +34,6 @@
 - (IBAction)closeURLDialog:(NSButton*)sender;
 
 - (IBAction)togglePlayPause:(id)sender;
+- (IBAction)slideSeekbar:(id)sender;
 
 @end
