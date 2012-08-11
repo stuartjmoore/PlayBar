@@ -11,7 +11,8 @@
 @implementation SMAppDelegate
 
 @synthesize statusItem = _statusItem, statusMenu = _statusMenu;
-@synthesize popover = _popover;
+@synthesize popover = _popover, openURLWindow = _openURLWindow;
+@synthesize URLField = _URLField;
 @synthesize player = _player, timer = _timer;
 @synthesize timeElapsedLabel, timeRemainingLabel;
 @synthesize titleLabel = _titleLabel, albumLabel = _albumLabel, artistLabel = _artistLabel;
@@ -57,12 +58,18 @@
     self.timeElapsedLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.currentTime.timeValue];
     self.timeRemainingLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue];
     self.albumArtView.image = self.player.posterImage;
-    /*
+    
     NSLog(@"%@", self.player.commonMetadata);
     NSLog(@"%@", self.player.availableMetadataFormats);
-    */
+    NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatID3Metadata"]);
+    NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeMetadata"]);
+    NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeUserData"]);
+    NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatiTunesMetadata"]);
+    
     for(QTMetadataItem *item in self.player.commonMetadata)
     {
+        //NSLog(@"%@", item.key);
+        
         if([(NSString*)item.key isEqualToString:@"title"])
             self.titleLabel.stringValue = item.stringValue;
         else if([(NSString*)item.key isEqualToString:@"albumName"])
@@ -80,7 +87,7 @@
     self.timeRemainingLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue];
 }
 
-- (IBAction)openFile:(id)sender
+- (IBAction)openFileDialog:(id)sender
 {
     NSOpenPanel *panel;
     
@@ -105,6 +112,38 @@
         }
     }];
 }
+
+- (IBAction)openURLDialog:(id)sender
+{
+    [NSApp beginSheet:self.openURLWindow
+       modalForWindow:self.popover
+        modalDelegate:self
+       didEndSelector:@selector(didEndSheet:returnCode:contextInfo:)
+          contextInfo:nil];
+}
+- (IBAction)closeURLDialog:(NSButton*)sender
+{
+    if([sender.title isEqualToString:@"Cancel"])
+        [NSApp endSheet:self.openURLWindow returnCode:0];
+    else if([sender.title isEqualToString:@"Open"])
+        [NSApp endSheet:self.openURLWindow returnCode:1];
+}
+- (void)didEndSheet:(NSWindow*)sheet returnCode:(NSInteger)returnCode contextInfo:(void*)contextInfo
+{
+    [sheet orderOut:self];
+
+    if(returnCode == 1)
+    {
+        QTMovie *file = [QTMovie movieWithURL:[NSURL URLWithString:self.URLField.stringValue] error:nil];
+        
+        if(file)
+        {
+            self.player = file;
+            [self.player autoplay];
+        }
+    }
+}
+
 
 - (IBAction)togglePlayPause:(id)sender
 {

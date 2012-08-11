@@ -21,12 +21,18 @@
 @property (strong, nonatomic) IBOutlet NSImageView *albumArtView;
 @property (strong, nonatomic) IBOutlet NSButton *playPauseButton;
 
+@property (strong, nonatomic) IBOutlet NSWindow *openURLWindow;
+@property (strong, nonatomic) IBOutlet NSTextField *URLField;
+
 @property (strong, nonatomic) QTMovie *player;
 @property (strong, nonatomic) NSTimer *timer;
 
 - (void)movieRateChanged:(NSNotification*)notification;
 
-- (IBAction)openFile:(id)sender;
+- (IBAction)openFileDialog:(id)sender;
+- (IBAction)openURLDialog:(id)sender;
+- (IBAction)closeURLDialog:(NSButton*)sender;
+
 - (IBAction)togglePlayPause:(id)sender;
 
 @end
