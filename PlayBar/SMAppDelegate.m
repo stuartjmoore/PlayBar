@@ -11,7 +11,11 @@
 @implementation SMAppDelegate
 
 @synthesize statusItem = _statusItem, statusMenu = _statusMenu;
-@synthesize popover = _popover, player = _player;
+@synthesize popover = _popover;
+@synthesize player = _player, timer = _timer;
+@synthesize timeElapsedLabel, timeRemainingLabel;
+@synthesize titleLabel = _titleLabel, albumLabel = _albumLabel, artistLabel = _artistLabel;
+@synthesize seekbar = _seekbar, albumArtView = _albumArtView, playPauseButton = _playPauseButton;
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
@@ -23,7 +27,7 @@
     
     [self.statusItem setTarget:self];
     [self.statusItem setAction:@selector(click:)];
-    [self.statusItem setDoubleAction:@selector(doubleClick:)];
+    //[self.statusItem setDoubleAction:@selector(doubleClick:)];
     
     /*QTMovie *file = [QTMovie movieWithURL:[NSURL URLWithString:@"http://d.ahoy.co/redirect.mp3/fly.5by5.tv/audio/broadcasts/buildanalyze/2012/buildanalyze-089.mp3"] error:nil];
     if(file)
@@ -31,6 +35,47 @@
         self.player = file;
         [self.player autoplay];
     }*/
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(movieRateChanged:)
+                                                 name:QTMovieRateDidChangeNotification
+                                               object:self.player];
+}
+
+- (void)movieRateChanged:(NSNotification*)notification
+{
+    if(self.player.rate)
+    {
+        self.playPauseButton.title = @"Pause";
+        
+        self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(updateSlider:) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:(NSString*)kCFRunLoopCommonModes];
+    }
+    else
+    {
+        self.playPauseButton.title = @"Play";
+        
+        [self.timer invalidate];
+    }
+    
+    self.seekbar.minValue = 0;
+    self.seekbar.maxValue = self.player.duration.timeValue;
+    self.seekbar.floatValue = self.player.currentTime.timeValue;
+    
+    self.timeElapsedLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.currentTime.timeValue];
+    self.timeRemainingLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue];
+    self.albumArtView.image = self.player.posterImage;
+    
+}
+
+- (void)updateSlider:(id)timer
+{
+    NSLog(@"hi");
+    
+    self.seekbar.floatValue = self.player.currentTime.timeValue;
+    
+    self.timeElapsedLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.currentTime.timeValue];
+    self.timeRemainingLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue];
 }
 
 - (IBAction)openFile:(id)sender
