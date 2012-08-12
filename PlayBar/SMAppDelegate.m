@@ -23,8 +23,9 @@
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [self.statusItem setHighlightMode:YES];
     
-    [self.statusItem setImage:[NSImage imageNamed:@"statusBarItemImage.png"]];
+    self.statusItem.image = [NSImage imageNamed:@"statusBarIcon.png"];
     self.statusItem.title = @"PlayBar";
+    self.statusItem.menu = self.statusMenu;
     
     [self.statusItem setTarget:self];
     [self.statusItem setAction:@selector(click:)];
@@ -33,6 +34,17 @@
                                              selector:@selector(movieRateChanged:)
                                                  name:QTMovieRateDidChangeNotification
                                                object:self.player];
+    
+    SMStatusView *view = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, 22)];
+    view.statusItem = self.statusItem;
+    view.popover = self.popover;
+    /*NSTextView *titleView = [[NSTextView alloc] initWithFrame:view.bounds];
+    titleView.string = @"gi";
+    [view addSubview:titleView];
+    NSImageView *iconView = [[NSImageView alloc] initWithFrame:view.bounds];
+    iconView.image = [NSImage imageNamed:@"statusBarIcon.png"];
+    [view addSubview:iconView];*/
+    self.statusItem.view = view;
 }
 
 - (void)movieRateChanged:(NSNotification*)notification
@@ -165,31 +177,6 @@
 - (IBAction)slideSeekbar:(id)sender
 {
     self.player.currentTime = QTMakeTime(self.seekbar.floatValue, self.player.duration.timeScale);
-}
-
-- (void)click:(id)sender
-{
-    NSRect frame = [[[NSApp currentEvent] window] frame];
-    NSSize screenSize = [[self.popover screen] frame].size;
-    
-    if(self.popover.isVisible)
-    {
-        [self.popover close];
-    }
-    else
-    {
-        frame.origin.y -= self.popover.frame.size.height;
-        frame.origin.x += (frame.size.width - self.popover.frame.size.width)/2;
-        
-        if(screenSize.width < frame.origin.x + self.popover.frame.size.width)
-            frame.origin.x = screenSize.width - self.popover.frame.size.width - 10;
-        
-        [self.popover setFrameOrigin:frame.origin];
-        
-        [self.popover setIsVisible:YES];
-        [self.popover makeKeyAndOrderFront:self];
-        [self.popover setLevel:NSScreenSaverWindowLevel];
-    }
 }
 
 @end

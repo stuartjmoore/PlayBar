@@ -13,8 +13,9 @@
 		1724F7E215D5BBFB00EFE31B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1724F7E015D5BBFB00EFE31B /* Credits.rtf */; };
 		1724F7E515D5BBFB00EFE31B /* SMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1724F7E415D5BBFB00EFE31B /* SMAppDelegate.m */; };
 		1724F7E815D5BBFB00EFE31B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1724F7E615D5BBFB00EFE31B /* MainMenu.xib */; };
-		173095BB15D819F100DD7E78 /* statusBarItemImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 173095B915D819F100DD7E78 /* statusBarItemImage.png */; };
-		173095BC15D819F100DD7E78 /* statusBarItemImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 173095BA15D819F100DD7E78 /* statusBarItemImage@2x.png */; };
+		173095DF15D8245F00DD7E78 /* statusBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 173095DD15D8245F00DD7E78 /* statusBarIcon.png */; };
+		173095E015D8245F00DD7E78 /* statusBarIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */; };
+		178A4A7F15D855460089E57A /* SMStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 178A4A7E15D855460089E57A /* SMStatusView.m */; };
 		17AC521B15D5D2A4003956D0 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC521A15D5D2A4003956D0 /* QTKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,8 +33,10 @@
 		1724F7E315D5BBFB00EFE31B /* SMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMAppDelegate.h; sourceTree = "<group>"; };
 		1724F7E415D5BBFB00EFE31B /* SMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMAppDelegate.m; sourceTree = "<group>"; };
 		1724F7E715D5BBFB00EFE31B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		173095B915D819F100DD7E78 /* statusBarItemImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statusBarItemImage.png; path = Resources/statusBarItemImage.png; sourceTree = SOURCE_ROOT; };
-		173095BA15D819F100DD7E78 /* statusBarItemImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarItemImage@2x.png"; path = "Resources/statusBarItemImage@2x.png"; sourceTree = SOURCE_ROOT; };
+		173095DD15D8245F00DD7E78 /* statusBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = statusBarIcon.png; path = Resources/statusBarIcon.png; sourceTree = SOURCE_ROOT; };
+		173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon@2x.png"; path = "Resources/statusBarIcon@2x.png"; sourceTree = SOURCE_ROOT; };
+		178A4A7D15D855460089E57A /* SMStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMStatusView.h; sourceTree = "<group>"; };
+		178A4A7E15D855460089E57A /* SMStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMStatusView.m; sourceTree = "<group>"; };
 		17AC521A15D5D2A4003956D0 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -92,6 +95,8 @@
 			children = (
 				1724F7E315D5BBFB00EFE31B /* SMAppDelegate.h */,
 				1724F7E415D5BBFB00EFE31B /* SMAppDelegate.m */,
+				178A4A7D15D855460089E57A /* SMStatusView.h */,
+				178A4A7E15D855460089E57A /* SMStatusView.m */,
 				1724F7E615D5BBFB00EFE31B /* MainMenu.xib */,
 				1724F7EE15D5BED500EFE31B /* Resources */,
 				1724F7D815D5BBFB00EFE31B /* Supporting Files */,
@@ -114,8 +119,8 @@
 		1724F7EE15D5BED500EFE31B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				173095B915D819F100DD7E78 /* statusBarItemImage.png */,
-				173095BA15D819F100DD7E78 /* statusBarItemImage@2x.png */,
+				173095DD15D8245F00DD7E78 /* statusBarIcon.png */,
+				173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -173,8 +178,8 @@
 				1724F7DC15D5BBFB00EFE31B /* InfoPlist.strings in Resources */,
 				1724F7E215D5BBFB00EFE31B /* Credits.rtf in Resources */,
 				1724F7E815D5BBFB00EFE31B /* MainMenu.xib in Resources */,
-				173095BB15D819F100DD7E78 /* statusBarItemImage.png in Resources */,
-				173095BC15D819F100DD7E78 /* statusBarItemImage@2x.png in Resources */,
+				173095DF15D8245F00DD7E78 /* statusBarIcon.png in Resources */,
+				173095E015D8245F00DD7E78 /* statusBarIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +192,7 @@
 			files = (
 				1724F7DE15D5BBFB00EFE31B /* main.m in Sources */,
 				1724F7E515D5BBFB00EFE31B /* SMAppDelegate.m in Sources */,
+				178A4A7F15D855460089E57A /* SMStatusView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

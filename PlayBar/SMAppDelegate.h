@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <QTKit/QTKit.h>
+#import "SMStatusView.h"
 
 @interface SMAppDelegate : NSObject <NSApplicationDelegate>
 
