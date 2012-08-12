@@ -24,7 +24,6 @@
     [self.statusItem setHighlightMode:YES];
     
     self.statusItem.image = [NSImage imageNamed:@"statusBarIcon.png"];
-    self.statusItem.title = @"PlayBar";
     self.statusItem.menu = self.statusMenu;
     
     [self.statusItem setTarget:self];
@@ -35,15 +34,9 @@
                                                  name:QTMovieRateDidChangeNotification
                                                object:self.player];
     
-    SMStatusView *view = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, 22)];
+    SMStatusView *view = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, self.statusItem.length)];
     view.statusItem = self.statusItem;
     view.popover = self.popover;
-    /*NSTextView *titleView = [[NSTextView alloc] initWithFrame:view.bounds];
-    titleView.string = @"gi";
-    [view addSubview:titleView];
-    NSImageView *iconView = [[NSImageView alloc] initWithFrame:view.bounds];
-    iconView.image = [NSImage imageNamed:@"statusBarIcon.png"];
-    [view addSubview:iconView];*/
     self.statusItem.view = view;
 }
 

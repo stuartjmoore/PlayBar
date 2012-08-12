@@ -17,11 +17,39 @@
     self = [super initWithFrame:frame];
     if (self)
     {
+        [self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
     }
     return self;
 }
 
-- (void)mouseDown:(NSEvent *)event
+- (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
+{
+    NSLog(@"draggingEntered %@", sender.draggingPasteboard);
+    
+    return NSDragOperationCopy;
+}
+
+- (void)draggingExited:(id<NSDraggingInfo>)sender
+{
+    NSLog(@"draggingExited %@", sender.draggingPasteboard);
+}
+
+- (BOOL)prepareForDragOperation:(id<NSDraggingInfo>)sender
+{
+    NSLog(@"prepareForDragOperation %@", sender.draggingPasteboard);
+    return YES;
+}
+
+- (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
+{
+    NSLog(@"performDragOperation %@", sender.draggingPasteboard);
+    
+    NSLog(@"performDragOperation %@",  [[[sender.draggingPasteboard stringForType:@"NSFilenamesPboardType"] propertyList] lastObject]);
+    
+    return YES;
+}
+
+- (void)mouseDown:(NSEvent*)event
 {
     NSRect frame = [[[NSApp currentEvent] window] frame];
     NSSize screenSize = [[self.popover screen] frame].size;
@@ -73,6 +101,9 @@
 - (void)drawRect:(NSRect)rect
 {
     [self.statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isMenuVisible];
+    
+    [[NSColor redColor] setFill];
+    NSRectFill(rect);
 }
 
 @end
