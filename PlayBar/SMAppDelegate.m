@@ -22,9 +22,9 @@
 {
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [self.statusItem setHighlightMode:YES];
-    [self.statusItem setToolTip:@"PlayBar\nWeekend Confirmed - Ep. 125 - 08/10/2012"];
     
     [self.statusItem setImage:[NSImage imageNamed:@"statusBarItemImage.png"]];
+    self.statusItem.title = @"PlayBar";
     
     [self.statusItem setTarget:self];
     [self.statusItem setAction:@selector(click:)];
@@ -55,6 +55,7 @@
     self.titleLabel.stringValue = @"";
     self.albumLabel.stringValue = @"";
     self.artistLabel.stringValue = @"";
+    self.statusItem.toolTip = @"";
     
     self.seekbar.minValue = 0;
     self.seekbar.maxValue = self.player.duration.timeValue;
@@ -76,7 +77,10 @@
         //NSLog(@"%@", item.key);
         
         if([(NSString*)item.key isEqualToString:@"title"])
+        {
             self.titleLabel.stringValue = item.stringValue;
+            self.statusItem.toolTip = [NSString stringWithFormat:@"PlayBar\n%@", item.stringValue];
+        }
         else if([(NSString*)item.key isEqualToString:@"albumName"])
             self.albumLabel.stringValue = item.stringValue;
         else if([(NSString*)item.key isEqualToString:@"artist"])
