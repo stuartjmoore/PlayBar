@@ -188,6 +188,7 @@
         
         [self.popover setIsVisible:YES];
         [self.popover makeKeyAndOrderFront:self];
+        [self.popover setLevel:NSScreenSaverWindowLevel];
     }
 }
 

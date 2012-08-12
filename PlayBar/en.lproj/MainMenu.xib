@@ -131,7 +131,7 @@
 				<string key="NSClassName">NSFontManager</string>
 			</object>
 			<object class="NSWindowTemplate" id="166802127">
-				<int key="NSWindowStyleMask">26</int>
+				<int key="NSWindowStyleMask">10</int>
 				<bool key="NSWindowAllowNontitledResizable">YES</bool>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{743, 379}, {492, 138}}</string>
@@ -393,7 +393,6 @@
 											<string key="NSFrame">{{0, 312}, {466, 15}}</string>
 											<reference key="NSSuperview" ref="951164701"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:60</string>
 											<int key="NSsFlags">1</int>
 											<reference key="NSTarget" ref="951164701"/>
@@ -633,7 +632,6 @@
 							<string key="NSFrame">{{313, 12}, {97, 32}}</string>
 							<reference key="NSSuperview" ref="413951988"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="73510200">
