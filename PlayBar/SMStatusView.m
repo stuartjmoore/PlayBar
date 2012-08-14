@@ -10,7 +10,7 @@
 
 @implementation SMStatusView
 
-@synthesize statusItem = _statusItem, popover = _popover;
+@synthesize statusItem = _statusItem;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -66,29 +66,7 @@
 
 - (void)mouseDown:(NSEvent*)event
 {
-    NSRect frame = [[[NSApp currentEvent] window] frame];
-    NSSize screenSize = [[self.popover screen] frame].size;
-    
-    if(self.popover.isVisible)
-    {
-        isMenuVisible = NO;
-        [self.popover close];
-    }
-    else
-    {
-        isMenuVisible = YES;
-        frame.origin.y -= self.popover.frame.size.height;
-        frame.origin.x += (frame.size.width - self.popover.frame.size.width)/2;
-        
-        if(screenSize.width < frame.origin.x + self.popover.frame.size.width)
-            frame.origin.x = screenSize.width - self.popover.frame.size.width - 10;
-        
-        [self.popover setFrameOrigin:frame.origin];
-        
-        [self.popover setIsVisible:YES];
-        [self.popover makeKeyAndOrderFront:self];
-        [self.popover setLevel:NSScreenSaverWindowLevel];
-    }
+    isMenuVisible = [self.delegate togglePopover];
     
     [self setNeedsDisplay:YES];
 }
@@ -118,7 +96,7 @@
     [[NSColor redColor] setFill];
     NSRectFill(rect);
     
-    //[self.statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isMenuVisible];
+    [self.statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isMenuVisible];
 }
 
 @end

@@ -36,7 +36,6 @@
     
     SMStatusView *view = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, self.statusItem.length)];
     view.statusItem = self.statusItem;
-    view.popover = self.popover;
     view.delegate = self;
     self.statusItem.view = view;
 }
@@ -156,6 +155,33 @@
         self.player = file;
         [self.player autoplay];
     }
+}
+
+- (BOOL)togglePopover
+{
+    NSRect frame = [[[NSApp currentEvent] window] frame];
+    NSSize screenSize = [[self.popover screen] frame].size;
+    
+    if(self.popover.isVisible)
+    {
+        [self.popover close];
+    }
+    else
+    {
+        frame.origin.y -= self.popover.frame.size.height;
+        frame.origin.x += (frame.size.width - self.popover.frame.size.width)/2;
+        
+        if(screenSize.width < frame.origin.x + self.popover.frame.size.width)
+            frame.origin.x = screenSize.width - self.popover.frame.size.width - 10;
+        
+        [self.popover setFrameOrigin:frame.origin];
+        
+        [self.popover setIsVisible:YES];
+        [self.popover makeKeyAndOrderFront:self];
+        [self.popover setLevel:NSScreenSaverWindowLevel];
+    }
+    
+    return self.popover.isVisible;
 }
 
 - (IBAction)togglePlayPause:(id)sender

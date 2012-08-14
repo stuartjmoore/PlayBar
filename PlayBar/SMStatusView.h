@@ -11,6 +11,7 @@
 @protocol SMAppDelegateDelegate
 @required
 - (void)addURL:(NSURL*)url;
+- (BOOL)togglePopover;
 @end
 
 @interface SMStatusView : NSView <NSMenuDelegate>
@@ -21,6 +22,5 @@
 @property (nonatomic, weak) id<SMAppDelegateDelegate> delegate;
 
 @property (nonatomic, weak) NSStatusItem *statusItem;
-@property (nonatomic, strong) NSPanel *popover;
 
 @end
