@@ -37,6 +37,7 @@
     SMStatusView *view = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, self.statusItem.length)];
     view.statusItem = self.statusItem;
     view.popover = self.popover;
+    view.delegate = self;
     self.statusItem.view = view;
 }
 
@@ -116,13 +117,7 @@
     {
         if(result == NSFileHandlingPanelOKButton)
         {
-            QTMovie *file = [QTMovie movieWithURL:panel.URL error:nil];
-            
-            if(file)
-            {
-                self.player = file;
-                [self.player autoplay];
-            }
+            [self addURL:panel.URL];
         }
     }];
 }
@@ -148,16 +143,20 @@
 
     if(returnCode == 1)
     {
-        QTMovie *file = [QTMovie movieWithURL:[NSURL URLWithString:self.URLField.stringValue] error:nil];
-        
-        if(file)
-        {
-            self.player = file;
-            [self.player autoplay];
-        }
+        [self addURL:[NSURL URLWithString:self.URLField.stringValue]];
     }
 }
 
+- (void)addURL:(NSURL*)url
+{
+    QTMovie *file = [QTMovie movieWithURL:url error:nil];
+    
+    if(file)
+    {
+        self.player = file;
+        [self.player autoplay];
+    }
+}
 
 - (IBAction)togglePlayPause:(id)sender
 {

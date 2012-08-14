@@ -10,7 +10,7 @@
 #import <QTKit/QTKit.h>
 #import "SMStatusView.h"
 
-@interface SMAppDelegate : NSObject <NSApplicationDelegate>
+@interface SMAppDelegate : NSObject <NSApplicationDelegate, SMAppDelegateDelegate>
 
 @property (strong, nonatomic) NSStatusItem *statusItem;
 @property (strong, nonatomic) IBOutlet NSMenu *statusMenu;
@@ -33,6 +33,8 @@
 - (IBAction)openFileDialog:(id)sender;
 - (IBAction)openURLDialog:(id)sender;
 - (IBAction)closeURLDialog:(NSButton*)sender;
+
+- (void)addURL:(NSURL*)url;
 
 - (IBAction)togglePlayPause:(id)sender;
 - (IBAction)slideSeekbar:(id)sender;

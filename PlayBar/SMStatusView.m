@@ -58,6 +58,9 @@
     
     NSLog(@"%@", fileURLs);
     
+    for(NSURL *url in fileURLs)
+        [self.delegate addURL:url];
+    
     return YES;
 }
 
