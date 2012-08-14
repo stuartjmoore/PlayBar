@@ -177,7 +177,17 @@
 
 - (IBAction)toggleList:(id)sender
 {
+    NSSize screenSize = [[self.popover screen] frame].size;
+    NSRect frame = self.popover.frame;
     
+    if(frame.size.height > self.popover.minSize.height)
+        frame.size.height = self.popover.minSize.height;
+    else
+        frame.size.height += 200;
+    
+    frame.origin.y = screenSize.height - 22 - frame.size.height;
+    
+    [self.popover setFrame:frame display:YES animate:YES];
 }
 
 @end
