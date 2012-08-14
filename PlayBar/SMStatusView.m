@@ -17,34 +17,46 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        [self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+        [self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, NSURLPboardType, NSStringPboardType, nil]];
     }
     return self;
 }
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
 {
-    NSLog(@"draggingEntered %@", sender.draggingPasteboard);
-    
     return NSDragOperationCopy;
-}
-
-- (void)draggingExited:(id<NSDraggingInfo>)sender
-{
-    NSLog(@"draggingExited %@", sender.draggingPasteboard);
 }
 
 - (BOOL)prepareForDragOperation:(id<NSDraggingInfo>)sender
 {
-    NSLog(@"prepareForDragOperation %@", sender.draggingPasteboard);
     return YES;
 }
 
 - (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
 {
-    NSLog(@"performDragOperation %@", sender.draggingPasteboard);
+    //NSLog(@"performDragOperation %@",  [[[sender.draggingPasteboard stringForType:@"NSFilenamesPboardType"] propertyList] lastObject]);
+   
+    NSMutableArray *fileURLs = [NSMutableArray array];
     
-    NSLog(@"performDragOperation %@",  [[[sender.draggingPasteboard stringForType:@"NSFilenamesPboardType"] propertyList] lastObject]);
+    for(NSPasteboardItem *item in sender.draggingPasteboard.pasteboardItems)
+    {
+        NSURL *url;
+        
+        if([item.types containsObject:@"public.url"])
+            url = [NSURL URLWithString:[item stringForType:@"public.url"]];
+        else if([item.types containsObject:@"public.file-url"])
+            url = [NSURL URLWithString:[item stringForType:@"public.file-url"]];
+        else if([item.types containsObject:@"public.utf8-plain-text"])
+            url = [NSURL URLWithString:[item stringForType:@"public.utf8-plain-text"]];
+        
+        if(url)
+            [fileURLs addObject:url];
+    }
+    
+    if(fileURLs.count == 0)
+        return NO;
+    
+    NSLog(@"%@", fileURLs);
     
     return YES;
 }
@@ -100,10 +112,10 @@
 
 - (void)drawRect:(NSRect)rect
 {
-    [self.statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isMenuVisible];
-    
     [[NSColor redColor] setFill];
     NSRectFill(rect);
+    
+    //[self.statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isMenuVisible];
 }
 
 @end
