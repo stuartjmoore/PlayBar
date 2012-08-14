@@ -38,5 +38,7 @@
 
 - (IBAction)togglePlayPause:(id)sender;
 - (IBAction)slideSeekbar:(id)sender;
+- (IBAction)nextEpisode:(id)sender;
+- (IBAction)toggleList:(id)sender;
 
 @end

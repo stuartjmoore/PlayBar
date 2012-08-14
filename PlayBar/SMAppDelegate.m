@@ -171,4 +171,13 @@
     self.player.currentTime = QTMakeTime(self.seekbar.floatValue, self.player.duration.timeScale);
 }
 
+- (IBAction)nextEpisode:(id)sender
+{
+}
+
+- (IBAction)toggleList:(id)sender
+{
+    
+}
+
 @end
