@@ -38,6 +38,8 @@
     view.statusItem = self.statusItem;
     view.delegate = self;
     self.statusItem.view = view;
+    
+    self.episodes = [NSMutableArray array];
 }
 
 - (void)movieRateChanged:(NSNotification*)notification
@@ -69,14 +71,14 @@
     self.timeElapsedLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.currentTime.timeValue];
     self.timeRemainingLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue];
     self.albumArtView.image = self.player.posterImage;
-    
+    /*
     NSLog(@"%@", self.player.commonMetadata);
     NSLog(@"%@", self.player.availableMetadataFormats);
     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatID3Metadata"]);
     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeMetadata"]);
     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeUserData"]);
     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatiTunesMetadata"]);
-    
+    */
     for(QTMetadataItem *item in self.player.commonMetadata)
     {
         //NSLog(@"%@", item.key);
@@ -154,6 +156,9 @@
     {
         self.player = file;
         [self.player autoplay];
+        
+        [self.episodes addObject:url];
+        NSLog(@"%@", self.episodes);
     }
 }
 
@@ -214,6 +219,31 @@
     frame.origin.y = screenSize.height - 22 - frame.size.height;
     
     [self.popover setFrame:frame display:YES animate:YES];
+}
+
+#pragma mark - NSTableViewDataSource
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView
+{
+    return self.episodes.count;
+}
+
+- (id)tableView:(NSTableView*)tableView objectValueForTableColumn:(NSTableColumn*)tableColumn row:(NSInteger)rowIndex
+{
+    if([tableColumn.identifier isEqualToString:@"title"])
+    {
+        return [self.episodes objectAtIndex:rowIndex];
+    }
+    else if([tableColumn.identifier isEqualToString:@"isPlaying"])
+    {
+        NSURL *url = [self.episodes objectAtIndex:rowIndex];
+        NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
+        
+        if([url isEqualTo:playingURL])
+            return @"✓";
+    }
+    
+    return nil;
 }
 
 @end

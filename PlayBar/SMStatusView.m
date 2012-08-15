@@ -54,8 +54,6 @@
     if(fileURLs.count == 0)
         return NO;
     
-    NSLog(@"%@", fileURLs);
-    
     for(NSURL *url in fileURLs)
         [self.delegate addURL:url];
     

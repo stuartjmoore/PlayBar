@@ -28,6 +28,8 @@
 @property (strong, nonatomic) QTMovie *player;
 @property (strong, nonatomic) NSTimer *timer;
 
+@property (strong, nonatomic) NSMutableArray *episodes;
+
 - (void)movieRateChanged:(NSNotification*)notification;
 
 - (IBAction)openFileDialog:(id)sender;
