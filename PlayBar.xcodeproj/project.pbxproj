@@ -17,6 +17,8 @@
 		173095E015D8245F00DD7E78 /* statusBarIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */; };
 		178A4A7F15D855460089E57A /* SMStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 178A4A7E15D855460089E57A /* SMStatusView.m */; };
 		17AC521B15D5D2A4003956D0 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC521A15D5D2A4003956D0 /* QTKit.framework */; };
+		17C553B315DC131200753DFF /* statusBarIcon-click.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C553B115DC131200753DFF /* statusBarIcon-click.png */; };
+		17C553B415DC131200753DFF /* statusBarIcon-click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		178A4A7D15D855460089E57A /* SMStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMStatusView.h; sourceTree = "<group>"; };
 		178A4A7E15D855460089E57A /* SMStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMStatusView.m; sourceTree = "<group>"; };
 		17AC521A15D5D2A4003956D0 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
+		17C553B115DC131200753DFF /* statusBarIcon-click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-click.png"; path = "Resources/statusBarIcon-click.png"; sourceTree = SOURCE_ROOT; };
+		17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-click@2x.png"; path = "Resources/statusBarIcon-click@2x.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 			children = (
 				173095DD15D8245F00DD7E78 /* statusBarIcon.png */,
 				173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */,
+				17C553B115DC131200753DFF /* statusBarIcon-click.png */,
+				17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -180,6 +186,8 @@
 				1724F7E815D5BBFB00EFE31B /* MainMenu.xib in Resources */,
 				173095DF15D8245F00DD7E78 /* statusBarIcon.png in Resources */,
 				173095E015D8245F00DD7E78 /* statusBarIcon@2x.png in Resources */,
+				17C553B315DC131200753DFF /* statusBarIcon-click.png in Resources */,
+				17C553B415DC131200753DFF /* statusBarIcon-click@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

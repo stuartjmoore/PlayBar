@@ -34,8 +34,6 @@
 
 - (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
 {
-    //NSLog(@"performDragOperation %@",  [[[sender.draggingPasteboard stringForType:@"NSFilenamesPboardType"] propertyList] lastObject]);
-   
     NSMutableArray *fileURLs = [NSMutableArray array];
     
     for(NSPasteboardItem *item in sender.draggingPasteboard.pasteboardItems)
@@ -93,10 +91,10 @@
 
 - (void)drawRect:(NSRect)rect
 {
-    [[NSColor redColor] setFill];
-    NSRectFill(rect);
-    
     [self.statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isMenuVisible];
+    
+    NSImage *image = isMenuVisible?[NSImage imageNamed:@"statusBarIcon-click"]:[NSImage imageNamed:@"statusBarIcon"];
+    [image drawInRect:self.bounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
 }
 
 @end

@@ -20,10 +20,10 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
-    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    self.statusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSVariableStatusItemLength];
     [self.statusItem setHighlightMode:YES];
     
-    self.statusItem.image = [NSImage imageNamed:@"statusBarIcon.png"];
+    self.statusItem.image = [NSImage imageNamed:@"statusBarIcon"];
     self.statusItem.menu = self.statusMenu;
     
     [self.statusItem setTarget:self];
@@ -34,7 +34,7 @@
                                                  name:QTMovieRateDidChangeNotification
                                                object:self.player];
     
-    SMStatusView *view = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, self.statusItem.length)];
+    SMStatusView *view = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, NSStatusBar.systemStatusBar.thickness)];
     view.statusItem = self.statusItem;
     view.delegate = self;
     self.statusItem.view = view;
