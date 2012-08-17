@@ -221,6 +221,24 @@
 
 - (IBAction)nextEpisode:(id)sender
 {
+    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
+    NSInteger rowIndex = [self.episodes indexOfObject:playingURL];
+    
+    rowIndex++;
+    
+    if(rowIndex >= self.episodes.count)
+        return;
+    
+    NSURL *url = [self.episodes objectAtIndex:rowIndex];
+    QTMovie *file = [QTMovie movieWithURL:url error:nil];
+    
+    if(file)
+    {
+        self.player = file;
+        [self.player autoplay];
+    }
+    
+    [self.episodeList reloadData];
 }
 
 - (IBAction)toggleList:(id)sender
