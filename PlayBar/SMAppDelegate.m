@@ -170,6 +170,7 @@
     if(self.popover.isVisible)
     {
         [self.popover close];
+        [NSApp deactivate];
     }
     else
     {
@@ -181,12 +182,19 @@
         
         [self.popover setFrameOrigin:frame.origin];
         
+        [NSApp activateIgnoringOtherApps:YES];
         [self.popover setIsVisible:YES];
         [self.popover makeKeyAndOrderFront:self];
-        [self.popover setLevel:NSScreenSaverWindowLevel];
     }
     
     return self.popover.isVisible;
+}
+
+- (void)applicationWillResignActive:(NSNotification *)aNotification
+{
+    [self.popover close];
+    ((SMStatusView*)self.statusItem.view).isHighlighted = NO;
+    [self.statusItem.view setNeedsDisplay:YES];
 }
 
 - (IBAction)togglePlayPause:(id)sender

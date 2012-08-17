@@ -15,12 +15,11 @@
 @end
 
 @interface SMStatusView : NSView <NSMenuDelegate>
-{
-    BOOL isMenuVisible;
-}
 
 @property (nonatomic, weak) id<SMAppDelegateDelegate> delegate;
 
 @property (nonatomic, weak) NSStatusItem *statusItem;
+
+@property (nonatomic) BOOL isHighlighted;
 
 @end

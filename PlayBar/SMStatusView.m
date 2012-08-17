@@ -11,6 +11,7 @@
 @implementation SMStatusView
 
 @synthesize statusItem = _statusItem;
+@synthesize isHighlighted;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -62,36 +63,36 @@
 
 - (void)mouseDown:(NSEvent*)event
 {
-    isMenuVisible = [self.delegate togglePopover];
+    isHighlighted = [self.delegate togglePopover];
     
     [self setNeedsDisplay:YES];
 }
 
-- (void)rightMouseDown:(NSEvent *)event
+- (void)rightMouseDown:(NSEvent*)event
 {   
     [self.statusItem.menu setDelegate:self];
     [self.statusItem popUpStatusItemMenu:self.statusItem.menu];
     [self setNeedsDisplay:YES];
 }
 
-- (void)menuWillOpen:(NSMenu *)menu
+- (void)menuWillOpen:(NSMenu*)menu
 {
-    isMenuVisible = YES;
+    isHighlighted = YES;
     [self setNeedsDisplay:YES];
 }
 
-- (void)menuDidClose:(NSMenu *)menu
+- (void)menuDidClose:(NSMenu*)menu
 {
-    isMenuVisible = NO;
+    isHighlighted = NO;
     [self.statusItem.menu setDelegate:nil];
     [self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)rect
 {
-    [self.statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isMenuVisible];
+    [self.statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isHighlighted];
     
-    NSImage *image = isMenuVisible?[NSImage imageNamed:@"statusBarIcon-click"]:[NSImage imageNamed:@"statusBarIcon"];
+    NSImage *image = isHighlighted?[NSImage imageNamed:@"statusBarIcon-click"]:[NSImage imageNamed:@"statusBarIcon"];
     [image drawInRect:self.bounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
 }
 

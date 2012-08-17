@@ -10,7 +10,7 @@
 #import <QTKit/QTKit.h>
 #import "SMStatusView.h"
 
-@interface SMAppDelegate : NSObject <NSApplicationDelegate, SMAppDelegateDelegate>
+@interface SMAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, SMAppDelegateDelegate>
 
 @property (strong, nonatomic) NSStatusItem *statusItem;
 @property (strong, nonatomic) IBOutlet NSMenu *statusMenu;
