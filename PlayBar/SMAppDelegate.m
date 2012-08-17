@@ -150,15 +150,24 @@
 
 - (void)addURL:(NSURL*)url
 {
-    QTMovie *file = [QTMovie movieWithURL:url error:nil];
+    if(![QTMovie canInitWithURL:url])
+        return;
     
-    if(file)
+    if(self.episodes.count == 0)
     {
-        self.player = file;
-        [self.player autoplay];
+        QTMovie *file = [QTMovie movieWithURL:url error:nil];
         
+        if(file)
+        {
+            self.player = file;
+            [self.player autoplay];
+        }
+    }
+    
+    if(![self.episodes containsObject:url])
+    {
         [self.episodes addObject:url];
-        NSLog(@"%@", self.episodes);
+        [self.episodeList reloadData];
     }
 }
 

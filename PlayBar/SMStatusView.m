@@ -25,6 +25,24 @@
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
 {
+    for(NSPasteboardItem *item in sender.draggingPasteboard.pasteboardItems)
+    {
+        NSURL *url;
+        
+        if([item.types containsObject:@"public.url"])
+            url = [NSURL URLWithString:[item stringForType:@"public.url"]];
+        else if([item.types containsObject:@"public.file-url"])
+            url = [NSURL URLWithString:[item stringForType:@"public.file-url"]];
+        else if([item.types containsObject:@"public.utf8-plain-text"])
+            url = [NSURL URLWithString:[item stringForType:@"public.utf8-plain-text"]];
+        
+        if([url.pathExtension isEqualToString:@"mp3"])
+           return NSDragOperationCopy;
+           
+        if(![QTMovie canInitWithURL:url])
+            return NSDragOperationNone;
+    }
+    
     return NSDragOperationCopy;
 }
 

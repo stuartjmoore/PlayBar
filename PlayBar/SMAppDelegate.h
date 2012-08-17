@@ -22,6 +22,8 @@
 @property (strong, nonatomic) IBOutlet NSImageView *albumArtView;
 @property (strong, nonatomic) IBOutlet NSButton *playPauseButton;
 
+@property (strong, nonatomic) IBOutlet NSTableView *episodeList;
+
 @property (strong, nonatomic) IBOutlet NSWindow *openURLWindow;
 @property (strong, nonatomic) IBOutlet NSTextField *URLField;
 
