@@ -94,7 +94,10 @@
 }
 
 - (void)rightMouseDown:(NSEvent*)event
-{   
+{
+    if(isHighlighted)
+        isHighlighted = [self.delegate togglePopover];
+    
     [self.statusItem.menu setDelegate:self];
     [self.statusItem popUpStatusItemMenu:self.statusItem.menu];
     [self setNeedsDisplay:YES];
