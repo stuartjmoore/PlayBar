@@ -18,6 +18,14 @@
 @synthesize titleLabel = _titleLabel, albumLabel = _albumLabel, artistLabel = _artistLabel;
 @synthesize seekbar = _seekbar, albumArtView = _albumArtView, playPauseButton = _playPauseButton;
 
+- (BOOL)application:(NSApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
+{
+    NSLog(@"%@", application);
+    NSLog(@"%@", launchOptions);
+    
+    return YES;
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification*)aNotification
 {
     self.statusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSVariableStatusItemLength];
@@ -287,6 +295,13 @@
     }
     
     return nil;
+}
+
+#pragma mark - Kill
+
+- (void)quit:(id)sender
+{
+    [[NSApplication sharedApplication] terminate:self];
 }
 
 @end

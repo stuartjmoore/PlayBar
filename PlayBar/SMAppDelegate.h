@@ -45,4 +45,6 @@
 - (IBAction)nextEpisode:(id)sender;
 - (IBAction)toggleList:(id)sender;
 
+- (IBAction)quit:(id)sender;
+
 @end
