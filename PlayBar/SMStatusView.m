@@ -18,7 +18,10 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        [self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, NSURLPboardType, NSStringPboardType, nil]];
+        [self registerForDraggedTypes:[NSArray arrayWithObjects:
+                                       NSFilenamesPboardType,
+                                       NSURLPboardType,
+                                       NSStringPboardType, nil]];
     }
     return self;
 }
@@ -36,23 +39,27 @@
         else if([item.types containsObject:@"public.utf8-plain-text"])
             url = [NSURL URLWithString:[item stringForType:@"public.utf8-plain-text"]];
         
-        if([url.pathExtension isEqualToString:@"mp3"])
-           return NSDragOperationCopy;
-           
-        if(![QTMovie canInitWithURL:url])
+        if(![url.pathExtension isEqualToString:@"mp3"] && ![QTMovie canInitWithURL:url])
             return NSDragOperationNone;
     }
+    
+    isHighlighted = YES;
+    [self setNeedsDisplay:YES];
     
     return NSDragOperationCopy;
 }
 
-- (BOOL)prepareForDragOperation:(id<NSDraggingInfo>)sender
+- (void)draggingExited:(id<NSDraggingInfo>)sender
 {
-    return YES;
+    isHighlighted = NO;
+    [self setNeedsDisplay:YES];
 }
 
 - (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
 {
+    isHighlighted = NO;
+    [self setNeedsDisplay:YES];
+    
     NSMutableArray *fileURLs = [NSMutableArray array];
     
     for(NSPasteboardItem *item in sender.draggingPasteboard.pasteboardItems)

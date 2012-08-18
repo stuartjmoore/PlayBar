@@ -42,6 +42,8 @@
     self.episodes = [NSMutableArray array];
 }
 
+#pragma mark - QTNotifications
+
 - (void)movieRateChanged:(NSNotification*)notification
 {
     if(self.player.rate)
@@ -102,6 +104,8 @@
     self.timeElapsedLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.currentTime.timeValue];
     self.timeRemainingLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue];
 }
+
+#pragma mark - Open Files
 
 - (IBAction)openFileDialog:(id)sender
 {
@@ -171,6 +175,8 @@
     }
 }
 
+#pragma mark - Window
+
 - (BOOL)togglePopover
 {
     NSRect frame = [[[NSApp currentEvent] window] frame];
@@ -205,6 +211,8 @@
     ((SMStatusView*)self.statusItem.view).isHighlighted = NO;
     [self.statusItem.view setNeedsDisplay:YES];
 }
+
+#pragma mark - Actions
 
 - (IBAction)togglePlayPause:(id)sender
 {
