@@ -42,6 +42,7 @@
 		17AC521A15D5D2A4003956D0 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		17C553B115DC131200753DFF /* statusBarIcon-click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-click.png"; path = "Resources/statusBarIcon-click.png"; sourceTree = SOURCE_ROOT; };
 		17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-click@2x.png"; path = "Resources/statusBarIcon-click@2x.png"; sourceTree = SOURCE_ROOT; };
+		17D76C9515DF8870009933A5 /* PlayBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PlayBar.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +112,7 @@
 		1724F7D815D5BBFB00EFE31B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				17D76C9515DF8870009933A5 /* PlayBar.entitlements */,
 				1724F7D915D5BBFB00EFE31B /* PlayBar-Info.plist */,
 				1724F7DA15D5BBFB00EFE31B /* InfoPlist.strings */,
 				1724F7DD15D5BBFB00EFE31B /* main.m */,
@@ -284,6 +286,7 @@
 		1724F7EC15D5BBFB00EFE31B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayBar/PlayBar-Prefix.pch";
@@ -296,6 +299,7 @@
 		1724F7ED15D5BBFB00EFE31B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayBar/PlayBar-Prefix.pch";
