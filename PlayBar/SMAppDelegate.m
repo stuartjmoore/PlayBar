@@ -14,7 +14,7 @@
 @synthesize popover = _popover, openURLWindow = _openURLWindow;
 @synthesize URLField = _URLField;
 @synthesize player = _player, timer = _timer;
-@synthesize timeElapsedLabel, timeRemainingLabel;
+@synthesize timeLabel = _timeLabel;
 @synthesize titleLabel = _titleLabel, albumLabel = _albumLabel, artistLabel = _artistLabel;
 @synthesize seekbar = _seekbar, albumArtView = _albumArtView, playPauseButton = _playPauseButton;
 
@@ -78,8 +78,7 @@
     self.seekbar.maxValue = self.player.duration.timeValue;
     self.seekbar.floatValue = self.player.currentTime.timeValue;
     
-    self.timeElapsedLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.currentTime.timeValue];
-    self.timeRemainingLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue];
+    self.timeLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue-self.player.currentTime.timeValue];
     self.albumArtView.image = self.player.posterImage;
     /*
     NSLog(@"%@", self.player.commonMetadata);
@@ -109,8 +108,7 @@
 {
     self.seekbar.floatValue = self.player.currentTime.timeValue;
     
-    self.timeElapsedLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.currentTime.timeValue];
-    self.timeRemainingLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue];
+    self.timeLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue-self.player.currentTime.timeValue];
 }
 
 #pragma mark - Open Files
@@ -175,6 +173,8 @@
             [self.player autoplay];
         }
     }
+    
+    // if is directory, recurse.
     
     if(![self.episodes containsObject:url])
     {

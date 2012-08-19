@@ -16,7 +16,7 @@
 @property (strong, nonatomic) IBOutlet NSMenu *statusMenu;
 
 @property (strong, nonatomic) IBOutlet NSPanel *popover;
-@property (strong, nonatomic) IBOutlet NSTextField *timeElapsedLabel, *timeRemainingLabel;
+@property (strong, nonatomic) IBOutlet NSTextField *timeLabel;
 @property (strong, nonatomic) IBOutlet NSTextField *titleLabel, *albumLabel, *artistLabel;
 @property (strong, nonatomic) IBOutlet NSSlider *seekbar;
 @property (strong, nonatomic) IBOutlet NSImageView *albumArtView;
