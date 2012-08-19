@@ -310,6 +310,7 @@
 
 - (void)quit:(id)sender
 {
+    [self.player stop];
     [[NSApplication sharedApplication] terminate:self];
 }
 
