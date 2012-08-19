@@ -77,8 +77,8 @@
     self.seekbar.minValue = 0;
     self.seekbar.maxValue = self.player.duration.timeValue;
     self.seekbar.floatValue = self.player.currentTime.timeValue;
+    self.timeLabel.stringValue = @"";
     
-    self.timeLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue-self.player.currentTime.timeValue];
     self.albumArtView.image = self.player.posterImage;
     /*
     NSLog(@"%@", self.player.commonMetadata);
@@ -106,9 +106,18 @@
 
 - (void)updateSlider:(id)timer
 {
+    self.seekbar.minValue = 0;
+    self.seekbar.maxValue = self.player.duration.timeValue;
     self.seekbar.floatValue = self.player.currentTime.timeValue;
     
-    self.timeLabel.stringValue = [NSString stringWithFormat:@"%lld", self.player.duration.timeValue-self.player.currentTime.timeValue];
+    NSTimeInterval currentTime, duration;
+    QTGetTimeInterval(self.player.currentTime, &currentTime);
+    QTGetTimeInterval(self.player.duration, &duration);
+    float timeRemaining = duration-currentTime;
+    int hours = timeRemaining/60/60;
+    int minutes = timeRemaining/60 - 60*hours;
+    int seconds = timeRemaining - 60*minutes - 60*60*hours;
+    self.timeLabel.stringValue = [NSString stringWithFormat:@"%0.1d:%0.2d:%0.2d", hours, minutes, seconds];
 }
 
 #pragma mark - Open Files

@@ -469,7 +469,7 @@
 								<object class="NSTextField" id="123149672">
 									<reference key="NSNextResponder" ref="763185171"/>
 									<int key="NSvFlags">265</int>
-									<string key="NSFrame">{{372, 13}, {52, 17}}</string>
+									<string key="NSFrame">{{353, 13}, {71, 17}}</string>
 									<reference key="NSSuperview" ref="763185171"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="359801407"/>
@@ -562,7 +562,7 @@
 								<object class="NSSlider" id="693067722">
 									<reference key="NSNextResponder" ref="763185171"/>
 									<int key="NSvFlags">266</int>
-									<string key="NSFrame">{{37, 13}, {332, 21}}</string>
+									<string key="NSFrame">{{37, 13}, {313, 21}}</string>
 									<reference key="NSSuperview" ref="763185171"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView"/>
@@ -1429,8 +1429,7 @@
 						<string key="popover">NSPanel</string>
 						<string key="seekbar">NSSlider</string>
 						<string key="statusMenu">NSMenu</string>
-						<string key="timeElapsedLabel">NSTextField</string>
-						<string key="timeRemainingLabel">NSTextField</string>
+						<string key="timeLabel">NSTextField</string>
 						<string key="titleLabel">NSTextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1474,12 +1473,8 @@
 							<string key="name">statusMenu</string>
 							<string key="candidateClassName">NSMenu</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="timeElapsedLabel">
-							<string key="name">timeElapsedLabel</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="timeRemainingLabel">
-							<string key="name">timeRemainingLabel</string>
+						<object class="IBToOneOutletInfo" key="timeLabel">
+							<string key="name">timeLabel</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="titleLabel">
