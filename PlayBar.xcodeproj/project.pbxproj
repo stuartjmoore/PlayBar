@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17149B8E15E902E200C3343C /* button-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17149B8B15E902E200C3343C /* button-list@2x.png */; };
+		17149B8F15E902E200C3343C /* button-pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17149B8C15E902E200C3343C /* button-pause@2x.png */; };
+		17149B9015E902E200C3343C /* button-skip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17149B8D15E902E200C3343C /* button-skip@2x.png */; };
+		171906CF15E390780008E531 /* button-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 171906CC15E390780008E531 /* button-list.png */; };
+		171906D015E390780008E531 /* button-pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 171906CD15E390780008E531 /* button-pause.png */; };
+		171906D115E390780008E531 /* button-skip.png in Resources */ = {isa = PBXBuildFile; fileRef = 171906CE15E390780008E531 /* button-skip.png */; };
 		1724F7D215D5BBFB00EFE31B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1724F7D115D5BBFB00EFE31B /* Cocoa.framework */; };
 		1724F7DC15D5BBFB00EFE31B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1724F7DA15D5BBFB00EFE31B /* InfoPlist.strings */; };
 		1724F7DE15D5BBFB00EFE31B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1724F7DD15D5BBFB00EFE31B /* main.m */; };
@@ -22,6 +28,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		17149B8B15E902E200C3343C /* button-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-list@2x.png"; path = "Resources/button-list@2x.png"; sourceTree = SOURCE_ROOT; };
+		17149B8C15E902E200C3343C /* button-pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-pause@2x.png"; path = "Resources/button-pause@2x.png"; sourceTree = SOURCE_ROOT; };
+		17149B8D15E902E200C3343C /* button-skip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-skip@2x.png"; path = "Resources/button-skip@2x.png"; sourceTree = SOURCE_ROOT; };
+		171906CC15E390780008E531 /* button-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-list.png"; path = "Resources/button-list.png"; sourceTree = SOURCE_ROOT; };
+		171906CD15E390780008E531 /* button-pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-pause.png"; path = "Resources/button-pause.png"; sourceTree = SOURCE_ROOT; };
+		171906CE15E390780008E531 /* button-skip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-skip.png"; path = "Resources/button-skip.png"; sourceTree = SOURCE_ROOT; };
 		1724F7CD15D5BBFB00EFE31B /* PlayBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1724F7D115D5BBFB00EFE31B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1724F7D415D5BBFB00EFE31B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -125,10 +137,16 @@
 		1724F7EE15D5BED500EFE31B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				173095DD15D8245F00DD7E78 /* statusBarIcon.png */,
-				173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */,
+				171906CC15E390780008E531 /* button-list.png */,
+				17149B8B15E902E200C3343C /* button-list@2x.png */,
+				171906CD15E390780008E531 /* button-pause.png */,
+				17149B8C15E902E200C3343C /* button-pause@2x.png */,
+				171906CE15E390780008E531 /* button-skip.png */,
+				17149B8D15E902E200C3343C /* button-skip@2x.png */,
 				17C553B115DC131200753DFF /* statusBarIcon-click.png */,
 				17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */,
+				173095DD15D8245F00DD7E78 /* statusBarIcon.png */,
+				173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -190,6 +208,12 @@
 				173095E015D8245F00DD7E78 /* statusBarIcon@2x.png in Resources */,
 				17C553B315DC131200753DFF /* statusBarIcon-click.png in Resources */,
 				17C553B415DC131200753DFF /* statusBarIcon-click@2x.png in Resources */,
+				171906CF15E390780008E531 /* button-list.png in Resources */,
+				171906D015E390780008E531 /* button-pause.png in Resources */,
+				171906D115E390780008E531 /* button-skip.png in Resources */,
+				17149B8E15E902E200C3343C /* button-list@2x.png in Resources */,
+				17149B8F15E902E200C3343C /* button-pause@2x.png in Resources */,
+				17149B9015E902E200C3343C /* button-skip@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

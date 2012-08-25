@@ -18,15 +18,20 @@
 @synthesize titleLabel = _titleLabel, albumLabel = _albumLabel, artistLabel = _artistLabel;
 @synthesize seekbar = _seekbar, albumArtView = _albumArtView, playPauseButton = _playPauseButton;
 
-- (BOOL)application:(NSApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
+- (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-    NSLog(@"%@", application);
-    NSLog(@"%@", launchOptions);
+    self.episodes = [NSMutableArray array];
+}
+
+- (BOOL)application:(NSApplication *)application openFile:(NSString *)filename
+{
+    NSURL *url = [NSURL fileURLWithPath:filename];
+    [self addURL:url];
     
     return YES;
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification*)aNotification
+- (void)applicationDidFinishLaunching:(NSNotification*)notification
 {
     self.statusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSVariableStatusItemLength];
     [self.statusItem setHighlightMode:YES];
@@ -46,8 +51,6 @@
     view.statusItem = self.statusItem;
     view.delegate = self;
     self.statusItem.view = view;
-    
-    self.episodes = [NSMutableArray array];
 }
 
 #pragma mark - QTNotifications
@@ -56,7 +59,7 @@
 {
     if(self.player.rate)
     {
-        self.playPauseButton.title = @"Pause";
+        //self.playPauseButton.title = @"Pause";
         
         [self.timer invalidate];
         self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(updateSlider:) userInfo:nil repeats:YES];
@@ -64,7 +67,7 @@
     }
     else
     {
-        self.playPauseButton.title = @"Play";
+        //self.playPauseButton.title = @"Play";
         
         [self.timer invalidate];
     }
@@ -118,6 +121,9 @@
     int minutes = timeRemaining/60 - 60*hours;
     int seconds = timeRemaining - 60*minutes - 60*60*hours;
     self.timeLabel.stringValue = [NSString stringWithFormat:@"%0.1d:%0.2d:%0.2d", hours, minutes, seconds];
+    
+    if(currentTime == duration)
+        [self nextEpisode:nil];
 }
 
 #pragma mark - Open Files

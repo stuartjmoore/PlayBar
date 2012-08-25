@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12A269</string>
+		<string key="IBDocument.SystemVersion">12B19</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
 		<string key="IBDocument.AppKitVersion">1187</string>
 		<string key="IBDocument.HIToolboxVersion">624.00</string>
@@ -169,8 +169,12 @@
 										</object>
 										<string key="NSCellIdentifier">_NS:22</string>
 										<reference key="NSControlView" ref="362321659"/>
-										<int key="NSButtonFlags">-2033434624</int>
-										<int key="NSButtonFlags2">162</int>
+										<int key="NSButtonFlags">-2042347520</int>
+										<int key="NSButtonFlags2">34</int>
+										<object class="NSCustomResource" key="NSNormalImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">button-list</string>
+										</object>
 										<string key="NSAlternateContents"/>
 										<string key="NSKeyEquivalent"/>
 										<int key="NSPeriodicDelay">400</int>
@@ -194,8 +198,12 @@
 										<reference key="NSSupport" ref="978598426"/>
 										<string key="NSCellIdentifier">_NS:22</string>
 										<reference key="NSControlView" ref="359801407"/>
-										<int key="NSButtonFlags">-2033434624</int>
-										<int key="NSButtonFlags2">162</int>
+										<int key="NSButtonFlags">-2042347520</int>
+										<int key="NSButtonFlags2">34</int>
+										<object class="NSCustomResource" key="NSNormalImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">button-skip</string>
+										</object>
 										<string key="NSAlternateContents"/>
 										<string key="NSKeyEquivalent"/>
 										<int key="NSPeriodicDelay">400</int>
@@ -206,7 +214,7 @@
 								<object class="NSButton" id="667016220">
 									<reference key="NSNextResponder" ref="763185171"/>
 									<int key="NSvFlags">268</int>
-									<string key="NSFrame">{{10, 13}, {21, 21}}</string>
+									<string key="NSFrame">{{5, 8}, {31, 32}}</string>
 									<reference key="NSSuperview" ref="763185171"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="693067722"/>
@@ -219,8 +227,12 @@
 										<reference key="NSSupport" ref="978598426"/>
 										<string key="NSCellIdentifier">_NS:2466</string>
 										<reference key="NSControlView" ref="667016220"/>
-										<int key="NSButtonFlags">-2033434624</int>
-										<int key="NSButtonFlags2">162</int>
+										<int key="NSButtonFlags">-2042347520</int>
+										<int key="NSButtonFlags2">34</int>
+										<object class="NSCustomResource" key="NSNormalImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">button-pause</string>
+										</object>
 										<string key="NSAlternateContents"/>
 										<string key="NSKeyEquivalent"/>
 										<int key="NSPeriodicDelay">400</int>
@@ -399,6 +411,7 @@
 											<string key="NSFrame">{{0, 312}, {466, 15}}</string>
 											<reference key="NSSuperview" ref="951164701"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:60</string>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 											<int key="NSsFlags">1</int>
@@ -469,7 +482,7 @@
 								<object class="NSTextField" id="123149672">
 									<reference key="NSNextResponder" ref="763185171"/>
 									<int key="NSvFlags">265</int>
-									<string key="NSFrame">{{353, 13}, {71, 17}}</string>
+									<string key="NSFrame">{{365, 13}, {59, 17}}</string>
 									<reference key="NSSuperview" ref="763185171"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="359801407"/>
@@ -562,10 +575,10 @@
 								<object class="NSSlider" id="693067722">
 									<reference key="NSNextResponder" ref="763185171"/>
 									<int key="NSvFlags">266</int>
-									<string key="NSFrame">{{37, 13}, {313, 21}}</string>
+									<string key="NSFrame">{{37, 13}, {325, 21}}</string>
 									<reference key="NSSuperview" ref="763185171"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView"/>
+									<reference key="NSNextKeyView" ref="123149672"/>
 									<string key="NSReuseIdentifierKey">_NS:779</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSSliderCell" key="NSCell" id="910223892">
@@ -1496,6 +1509,9 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>
+			<string key="button-list">{6.5004511722477618, 5.5003817611327221}</string>
+			<string key="button-pause">{5.5003817611327221, 10}</string>
+			<string key="button-skip">{8, 5}</string>
 		</dictionary>
 	</data>
 </archive>
