@@ -13,6 +13,7 @@
 @required
 - (void)addURL:(NSURL*)url;
 - (BOOL)togglePopover;
+- (IBAction)togglePlayPause:(id)sender;
 @end
 
 @interface SMStatusView : NSView <NSMenuDelegate>
@@ -22,5 +23,7 @@
 @property (nonatomic, weak) NSStatusItem *statusItem;
 
 @property (nonatomic) BOOL isHighlighted;
+
+- (void)highlight:(NSNumber*)_isHightlighted;
 
 @end

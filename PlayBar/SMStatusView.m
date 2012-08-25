@@ -88,6 +88,25 @@
 
 - (void)mouseDown:(NSEvent*)event
 {
+    if(event.modifierFlags & NSControlKeyMask)
+    {
+        [self rightMouseDown:nil];
+        return;
+    }
+    else if(event.modifierFlags & NSAlternateKeyMask)
+    {
+        [self.delegate togglePlayPause:nil];
+        
+        if(isHighlighted)
+            isHighlighted = [self.delegate togglePopover];
+        
+        isHighlighted = YES;
+        [self setNeedsDisplay:YES];
+        [self performSelector:@selector(highlight:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.1f];
+        
+        return;
+    }
+    
     isHighlighted = [self.delegate togglePopover];
     
     [self setNeedsDisplay:YES];
@@ -113,6 +132,12 @@
 {
     isHighlighted = NO;
     [self.statusItem.menu setDelegate:nil];
+    [self setNeedsDisplay:YES];
+}
+
+- (void)highlight:(NSNumber*)_isHightlighted
+{
+    isHighlighted = _isHightlighted.boolValue;
     [self setNeedsDisplay:YES];
 }
 
