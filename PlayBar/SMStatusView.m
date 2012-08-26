@@ -122,6 +122,21 @@
     [self setNeedsDisplay:YES];
 }
 
+- (void)otherMouseDown:(NSEvent *)event
+{
+    if(event.buttonNumber == 2)
+    {
+        [self.delegate togglePlayPause:nil];
+        
+        if(isHighlighted)
+            isHighlighted = [self.delegate togglePopover];
+        
+        isHighlighted = YES;
+        [self setNeedsDisplay:YES];
+        [self performSelector:@selector(highlight:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.1f];
+    }
+}
+
 - (void)menuWillOpen:(NSMenu*)menu
 {
     isHighlighted = YES;
