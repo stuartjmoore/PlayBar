@@ -2,7 +2,7 @@ I've found I don't have enough time to finish this project, yet I still use it e
 
 # What is it?
 
-[PlayBar](screenshot-closed.png "PlayBar")
+![](https://github.com/stuartjmoore/PlayBar/edit/master/screenshot-closed.png)
 
 PlayBar is a simple way to stream and queue MP3 files. It was designed for the purpose of listening to hour long podcasts without needed a separate window/dock icon (Quicktime) or having to add the files to any sort of database (iTunes).
 
@@ -16,4 +16,4 @@ The design is a little lacking. It has some polish, but the text parsing is very
 
 There is currently no save state. If you quit in the middle of an episode, you have to remember where you left off. Saving the timecode seems like it goes against the anti-database, but only episodes that are less than ~80% played need to be remembered.
 
-[PlayBar](screenshot-open.png "PlayBar")
+![](https://github.com/stuartjmoore/PlayBar/edit/master/screenshot-closed.png)
