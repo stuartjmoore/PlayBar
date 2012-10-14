@@ -10,7 +10,7 @@
 #import <QTKit/QTKit.h>
 #import "SMStatusView.h"
 
-@interface SMAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, SMAppDelegateDelegate>
+@interface SMAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource, SMAppDelegateDelegate>
 
 @property (strong, nonatomic) NSStatusItem *statusItem;
 @property (strong, nonatomic) IBOutlet NSMenu *statusMenu;
@@ -45,6 +45,8 @@
 - (IBAction)slideSeekbar:(id)sender;
 - (IBAction)nextEpisode:(id)sender;
 - (IBAction)toggleList:(id)sender;
+
+- (void)doubleClickOnTableView:(NSTableView*)tableView;
 
 - (IBAction)quit:(id)sender;
 

@@ -33,6 +33,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification*)notification
 {
+    [self.episodeList setDoubleAction:@selector(doubleClickOnTableView:)];
+    
     self.statusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSVariableStatusItemLength];
     [self.statusItem setHighlightMode:YES];
     
@@ -342,6 +344,39 @@
     }
     
     return nil;
+}
+
+- (void)doubleClickOnTableView:(NSTableView*)tableView
+{
+    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
+    NSNumber *playingTime = [NSNumber numberWithLongLong:self.player.currentTime.timeValue];
+        
+    NSTimeInterval currentTime, duration;
+    QTGetTimeInterval(self.player.currentTime, &currentTime);
+    QTGetTimeInterval(self.player.duration, &duration);
+        
+    if(currentTime > duration*0.8f)
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:playingURL.absoluteString];
+    else
+        [NSUserDefaults.standardUserDefaults setObject:playingTime forKey:playingURL.absoluteString];
+        
+    [NSUserDefaults.standardUserDefaults synchronize];
+    
+    
+    NSInteger rowIndex = tableView.clickedRow;
+    NSURL *url = [self.episodes objectAtIndex:rowIndex];
+    QTMovie *file = [QTMovie movieWithURL:url error:nil];
+    
+    if(file)
+    {
+        self.player = file;
+        [self.player autoplay];
+        
+        NSNumber *currentTime = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
+        self.player.currentTime = QTMakeTime(currentTime.longLongValue, self.player.duration.timeScale);
+    }
+    
+    [self.episodeList reloadData];
 }
 
 #pragma mark - Kill
