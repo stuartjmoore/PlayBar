@@ -14,6 +14,4 @@ Clicking the icon brings up the window, right-clicking brings up the menu, and m
 
 The design is a little lacking. It has some polish, but the text parsing is very, very poor. The title doesn't show up 50% of the time, and the playlist shows a confusing URL.
 
-There is currently no save state. If you quit in the middle of an episode, you have to remember where you left off. Saving the timecode seems like it goes against the anti-database, but only episodes that are less than ~80% played need to be remembered.
-
 ![](https://raw.github.com/stuartjmoore/PlayBar/master/screenshot-open.png)
