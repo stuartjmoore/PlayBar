@@ -33,6 +33,7 @@
 @property (strong, nonatomic) NSMutableArray *episodes;
 
 - (void)movieRateChanged:(NSNotification*)notification;
+- (void)movieEnded:(NSNotification*)notification;
 
 - (IBAction)openFileDialog:(id)sender;
 - (IBAction)openURLDialog:(id)sender;

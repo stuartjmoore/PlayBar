@@ -46,6 +46,10 @@
                                              selector:@selector(movieRateChanged:)
                                                  name:QTMovieRateDidChangeNotification
                                                object:self.player];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(movieEnded:)
+                                                 name:QTMovieDidEndNotification
+                                               object:self.player];
     
     SMStatusView *view = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, NSStatusBar.systemStatusBar.thickness)];
     view.statusItem = self.statusItem;
@@ -80,7 +84,6 @@
     self.seekbar.minValue = 0;
     self.seekbar.maxValue = self.player.duration.timeValue;
     self.seekbar.floatValue = self.player.currentTime.timeValue;
-    self.timeLabel.stringValue = @"";
     
     self.albumArtView.image = self.player.posterImage;
     /*
@@ -107,6 +110,10 @@
     }
 }
 
+- (void)movieEnded:(NSNotification*)notification
+{
+}
+
 - (void)updateSlider:(id)timer
 {
     self.seekbar.minValue = 0;
@@ -122,7 +129,7 @@
     int seconds = timeRemaining - 60*minutes - 60*60*hours;
     self.timeLabel.stringValue = [NSString stringWithFormat:@"%0.1d:%0.2d:%0.2d", hours, minutes, seconds];
     
-    if(currentTime == duration)
+    if(hours == 0 && minutes == 0 && seconds == 0)
         [self nextEpisode:nil];
 }
 
@@ -186,6 +193,9 @@
         {
             self.player = file;
             [self.player autoplay];
+            
+            NSNumber *currentTime = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
+            self.player.currentTime = QTMakeTime(currentTime.longLongValue, self.player.duration.timeScale);
         }
     }
     
@@ -228,7 +238,7 @@
     return self.popover.isVisible;
 }
 
-- (void)applicationWillResignActive:(NSNotification *)aNotification
+- (void)applicationWillResignActive:(NSNotification *)notification
 {
     [self.popover close];
     ((SMStatusView*)self.statusItem.view).isHighlighted = NO;
@@ -255,10 +265,29 @@
     NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
     NSInteger rowIndex = [self.episodes indexOfObject:playingURL];
     
+    if(sender)
+    {
+        NSNumber *playingTime = [NSNumber numberWithLongLong:self.player.currentTime.timeValue];
+        
+        NSTimeInterval currentTime, duration;
+        QTGetTimeInterval(self.player.currentTime, &currentTime);
+        QTGetTimeInterval(self.player.duration, &duration);
+        
+        if(currentTime > duration*0.8f)
+            [NSUserDefaults.standardUserDefaults removeObjectForKey:playingURL.absoluteString];
+        else
+            [NSUserDefaults.standardUserDefaults setObject:playingTime forKey:playingURL.absoluteString];
+        
+        [NSUserDefaults.standardUserDefaults synchronize];
+    }
+    
     rowIndex++;
     
     if(rowIndex >= self.episodes.count)
-        return;
+    {
+        [self.player stop];
+        [NSApplication.sharedApplication terminate:self];
+    }
     
     NSURL *url = [self.episodes objectAtIndex:rowIndex];
     QTMovie *file = [QTMovie movieWithURL:url error:nil];
@@ -267,6 +296,9 @@
     {
         self.player = file;
         [self.player autoplay];
+        
+        NSNumber *currentTime = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
+        self.player.currentTime = QTMakeTime(currentTime.longLongValue, self.player.duration.timeScale);
     }
     
     [self.episodeList reloadData];
@@ -317,7 +349,27 @@
 - (void)quit:(id)sender
 {
     [self.player stop];
-    [[NSApplication sharedApplication] terminate:self];
+    [NSApplication.sharedApplication terminate:self];
+}
+
+- (void)applicationWillTerminate:(NSNotification*)notification
+{
+    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
+    NSNumber *playingTime = [NSNumber numberWithLongLong:self.player.currentTime.timeValue];
+    
+    if(playingURL)
+    {
+        NSTimeInterval currentTime, duration;
+        QTGetTimeInterval(self.player.currentTime, &currentTime);
+        QTGetTimeInterval(self.player.duration, &duration);
+        
+        if(currentTime > duration*0.8f)
+            [NSUserDefaults.standardUserDefaults removeObjectForKey:playingURL.absoluteString];
+        else
+            [NSUserDefaults.standardUserDefaults setObject:playingTime forKey:playingURL.absoluteString];
+        
+        [NSUserDefaults.standardUserDefaults synchronize];
+    }
 }
 
 @end
