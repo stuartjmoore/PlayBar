@@ -264,24 +264,11 @@
 
 - (IBAction)nextEpisode:(id)sender
 {
+    if(sender)
+        [self saveState];
+    
     NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
     NSInteger rowIndex = [self.episodes indexOfObject:playingURL];
-    
-    if(sender)
-    {
-        NSNumber *playingTime = [NSNumber numberWithLongLong:self.player.currentTime.timeValue];
-        
-        NSTimeInterval currentTime, duration;
-        QTGetTimeInterval(self.player.currentTime, &currentTime);
-        QTGetTimeInterval(self.player.duration, &duration);
-        
-        if(currentTime > duration*0.8f)
-            [NSUserDefaults.standardUserDefaults removeObjectForKey:playingURL.absoluteString];
-        else
-            [NSUserDefaults.standardUserDefaults setObject:playingTime forKey:playingURL.absoluteString];
-        
-        [NSUserDefaults.standardUserDefaults synchronize];
-    }
     
     rowIndex++;
     
@@ -321,6 +308,28 @@
     [self.popover setFrame:frame display:YES animate:YES];
 }
 
+#pragma mark - Helpers
+
+- (void)saveState
+{
+    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
+    NSNumber *playingTime = [NSNumber numberWithLongLong:self.player.currentTime.timeValue];
+    
+    if(playingURL)
+    {
+        NSTimeInterval currentTime, duration;
+        QTGetTimeInterval(self.player.currentTime, &currentTime);
+        QTGetTimeInterval(self.player.duration, &duration);
+        
+        if(currentTime > duration*0.8f)
+            [NSUserDefaults.standardUserDefaults removeObjectForKey:playingURL.absoluteString];
+        else
+            [NSUserDefaults.standardUserDefaults setObject:playingTime forKey:playingURL.absoluteString];
+        
+        [NSUserDefaults.standardUserDefaults synchronize];
+    }
+}
+
 #pragma mark - NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView*)tableView
@@ -348,23 +357,9 @@
 
 - (void)doubleClickOnTableView:(NSTableView*)tableView
 {
-    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
-    NSNumber *playingTime = [NSNumber numberWithLongLong:self.player.currentTime.timeValue];
-        
-    NSTimeInterval currentTime, duration;
-    QTGetTimeInterval(self.player.currentTime, &currentTime);
-    QTGetTimeInterval(self.player.duration, &duration);
-        
-    if(currentTime > duration*0.8f)
-        [NSUserDefaults.standardUserDefaults removeObjectForKey:playingURL.absoluteString];
-    else
-        [NSUserDefaults.standardUserDefaults setObject:playingTime forKey:playingURL.absoluteString];
-        
-    [NSUserDefaults.standardUserDefaults synchronize];
+    [self saveState];
     
-    
-    NSInteger rowIndex = tableView.clickedRow;
-    NSURL *url = [self.episodes objectAtIndex:rowIndex];
+    NSURL *url = [self.episodes objectAtIndex:tableView.clickedRow];
     QTMovie *file = [QTMovie movieWithURL:url error:nil];
     
     if(file)
@@ -389,22 +384,7 @@
 
 - (void)applicationWillTerminate:(NSNotification*)notification
 {
-    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
-    NSNumber *playingTime = [NSNumber numberWithLongLong:self.player.currentTime.timeValue];
-    
-    if(playingURL)
-    {
-        NSTimeInterval currentTime, duration;
-        QTGetTimeInterval(self.player.currentTime, &currentTime);
-        QTGetTimeInterval(self.player.duration, &duration);
-        
-        if(currentTime > duration*0.8f)
-            [NSUserDefaults.standardUserDefaults removeObjectForKey:playingURL.absoluteString];
-        else
-            [NSUserDefaults.standardUserDefaults setObject:playingTime forKey:playingURL.absoluteString];
-        
-        [NSUserDefaults.standardUserDefaults synchronize];
-    }
+    [self saveState];
 }
 
 @end
