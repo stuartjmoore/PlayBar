@@ -18,17 +18,29 @@
 @synthesize titleLabel = _titleLabel, albumLabel = _albumLabel, artistLabel = _artistLabel;
 @synthesize seekbar = _seekbar, albumArtView = _albumArtView, playPauseButton = _playPauseButton;
 
-- (void)applicationWillFinishLaunching:(NSNotification *)notification
+- (void)applicationWillFinishLaunching:(NSNotification*)notification
 {
     self.episodes = [NSMutableArray array];
+    
+    NSAppleEventManager *appleEventManager = [NSAppleEventManager sharedAppleEventManager];
+    [appleEventManager setEventHandler:self
+                           andSelector:@selector(handleGetURLEvent:withReplyEvent:)
+                         forEventClass:kInternetEventClass andEventID:kAEGetURL];
 }
 
-- (BOOL)application:(NSApplication *)application openFile:(NSString *)filename
+- (BOOL)application:(NSApplication*)application openFile:(NSString*)filename
 {
     NSURL *url = [NSURL fileURLWithPath:filename];
     [self addURL:url];
     
     return YES;
+}
+
+- (void)handleGetURLEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
+{
+    NSString *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+    NSURL *url = [NSURL URLWithString:urlString];
+    [self addURL:url];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification*)notification
@@ -272,7 +284,7 @@
     
     rowIndex++;
     
-    if(rowIndex >= self.episodes.count)
+    if(!sender && rowIndex >= self.episodes.count)
     {
         [self.player stop];
         [NSApplication.sharedApplication terminate:self];
