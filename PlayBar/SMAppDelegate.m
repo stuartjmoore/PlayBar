@@ -55,6 +55,10 @@
     self.statusItem.view = statusView;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(movieLoaded:)
+                                                 name:QTMovieLoadStateDidChangeNotification
+                                               object:self.player];
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(movieRateChanged:)
                                                  name:QTMovieRateDidChangeNotification
                                                object:self.player];
@@ -65,6 +69,38 @@
 }
 
 #pragma mark - QTNotifications
+
+- (void)movieLoaded:(NSNotification*)notification
+{
+    self.seekbar.minValue = 0;
+    self.seekbar.maxValue = self.player.duration.timeValue;
+    self.seekbar.floatValue = self.player.currentTime.timeValue;
+    
+    self.albumArtView.image = self.player.posterImage;
+    /*
+     NSLog(@"%@", self.player.commonMetadata);
+     NSLog(@"%@", self.player.availableMetadataFormats);
+     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatID3Metadata"]);
+     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeMetadata"]);
+     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeUserData"]);
+     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatiTunesMetadata"]);
+     NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.mdta"]);
+     NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.udta"]);
+     */
+    for(QTMetadataItem *item in self.player.commonMetadata)
+    {
+        if([(NSString*)item.key isEqualToString:@"title"])
+        {
+            self.titleLabel.stringValue = item.stringValue;
+            SMStatusView *statusView = (SMStatusView*)self.statusItem.view;
+            statusView.toolTip = [NSString stringWithFormat:@"PlayBar - %@", item.stringValue];
+        }
+        else if([(NSString*)item.key isEqualToString:@"albumName"])
+            self.albumLabel.stringValue = item.stringValue;
+        else if([(NSString*)item.key isEqualToString:@"artist"])
+            self.artistLabel.stringValue = item.stringValue;
+    }
+}
 
 - (void)movieRateChanged:(NSNotification*)notification
 {
@@ -85,40 +121,6 @@
         statusView.image = [NSImage imageNamed:@"statusBarIcon"];
         
         [self.timer invalidate];
-    }
-    
-    self.titleLabel.stringValue = @"";
-    self.albumLabel.stringValue = @"";
-    self.artistLabel.stringValue = @"";
-    self.statusItem.toolTip = @"";
-    
-    self.seekbar.minValue = 0;
-    self.seekbar.maxValue = self.player.duration.timeValue;
-    self.seekbar.floatValue = self.player.currentTime.timeValue;
-    
-    self.albumArtView.image = self.player.posterImage;
-    /*
-    NSLog(@"%@", self.player.commonMetadata);
-    NSLog(@"%@", self.player.availableMetadataFormats);
-    NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatID3Metadata"]);
-    NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeMetadata"]);
-    NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeUserData"]);
-    NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatiTunesMetadata"]);
-    NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.mdta"]);
-    NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.udta"]);
-    */
-    for(QTMetadataItem *item in self.player.commonMetadata)
-    {
-        if([(NSString*)item.key isEqualToString:@"title"])
-        {
-            self.titleLabel.stringValue = item.stringValue;
-            SMStatusView *statusView = (SMStatusView*)self.statusItem.view;
-            statusView.toolTip = [NSString stringWithFormat:@"PlayBar - %@", item.stringValue];
-        }
-        else if([(NSString*)item.key isEqualToString:@"albumName"])
-            self.albumLabel.stringValue = item.stringValue;
-        else if([(NSString*)item.key isEqualToString:@"artist"])
-            self.artistLabel.stringValue = item.stringValue;
     }
 }
 
@@ -185,27 +187,42 @@
         [self addURL:[NSURL URLWithString:self.URLField.stringValue]];
 }
 
+#pragma mark - Add and Play
+
 - (void)addURL:(NSURL*)url
 {
     if(![QTMovie canInitWithURL:url])
         return;
     
     if(self.episodes.count == 0)
-    {
         [self playURL:url];
-    }
     
     // if is directory, recurse.
     
-    if(![self.episodes containsObject:url])
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", url];
+    NSArray *array = [self.episodes filteredArrayUsingPredicate:predicate];
+    
+    if(!array || array.count == 0)
     {
-        [self.episodes addObject:url];
+        NSDictionary *episodeDictionary = @{ @"title" : url.lastPathComponent, @"url" : url };
+        [self.episodes addObject:episodeDictionary];
         [self.episodeList reloadData];
     }
 }
 
 - (void)playURL:(NSURL*)url
 {
+    self.titleLabel.stringValue = @"";
+    self.albumLabel.stringValue = @"";
+    self.artistLabel.stringValue = @"";
+    self.statusItem.toolTip = @"";
+    
+    self.seekbar.minValue = 0;
+    self.seekbar.maxValue = 0;
+    self.seekbar.floatValue = 0;
+    
+    self.albumArtView.image = nil;
+    
     QTMovie *file = [QTMovie movieWithURL:url error:nil];
     
     if(file)
@@ -239,14 +256,24 @@
         [self saveState];
     
     NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
-    NSInteger rowIndex = [self.episodes indexOfObject:playingURL];
+    NSInteger rowIndex = 0;
     
-    rowIndex++;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", playingURL];
+    NSArray *array = [self.episodes filteredArrayUsingPredicate:predicate];
+    
+    if(array.count > 0)
+    {
+        rowIndex = [self.episodes indexOfObject:array[0]];
+        rowIndex++;
+    }
     
     if(!sender && rowIndex >= self.episodes.count)
         [self quit:nil];
     
-    NSURL *url = [self.episodes objectAtIndex:rowIndex];
+    if(rowIndex >= self.episodes.count)
+        rowIndex = 0;
+        
+    NSURL *url = self.episodes[rowIndex][@"url"];
     [self playURL:url];
     
     [self.episodeList reloadData];
@@ -300,11 +327,11 @@
 {
     if([tableColumn.identifier isEqualToString:@"title"])
     {
-        return [self.episodes objectAtIndex:rowIndex];
+        return self.episodes[rowIndex][@"title"];
     }
     else if([tableColumn.identifier isEqualToString:@"isPlaying"])
     {
-        NSURL *url = [self.episodes objectAtIndex:rowIndex];
+        NSURL *url = self.episodes[rowIndex][@"url"];
         NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
         
         if([url isEqualTo:playingURL])
@@ -318,7 +345,7 @@
 {
     [self saveState];
     
-    NSURL *url = [self.episodes objectAtIndex:tableView.clickedRow];
+    NSURL *url = self.episodes[tableView.clickedRow][@"url"];
     [self playURL:url];
     
     [self.episodeList reloadData];

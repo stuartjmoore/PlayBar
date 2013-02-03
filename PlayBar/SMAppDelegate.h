@@ -32,6 +32,7 @@
 
 @property (strong, nonatomic) NSMutableArray *episodes;
 
+- (void)movieLoaded:(NSNotification*)notification;
 - (void)movieRateChanged:(NSNotification*)notification;
 - (void)movieEnded:(NSNotification*)notification;
 
