@@ -87,18 +87,39 @@
      NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.mdta"]);
      NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.udta"]);
      */
+    
+    NSString *title = @"", *artist = @"", *album = @"";
+    
     for(QTMetadataItem *item in self.player.commonMetadata)
     {
         if([(NSString*)item.key isEqualToString:@"title"])
-        {
-            self.titleLabel.stringValue = item.stringValue;
-            SMStatusView *statusView = (SMStatusView*)self.statusItem.view;
-            statusView.toolTip = [NSString stringWithFormat:@"PlayBar - %@", item.stringValue];
-        }
+            title = item.stringValue;
         else if([(NSString*)item.key isEqualToString:@"albumName"])
-            self.albumLabel.stringValue = item.stringValue;
+            album = item.stringValue;
         else if([(NSString*)item.key isEqualToString:@"artist"])
-            self.artistLabel.stringValue = item.stringValue;
+            artist = item.stringValue;
+    }
+    
+    self.titleLabel.stringValue = title;
+    ((SMStatusView*)self.statusItem.view).toolTip = [NSString stringWithFormat:@"PlayBar - %@", title];
+    self.albumLabel.stringValue = album;
+    self.artistLabel.stringValue = artist;
+
+    
+    NSInteger rowIndex = 0;
+    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", playingURL];
+    NSArray *array = [self.episodes filteredArrayUsingPredicate:predicate];
+    
+    if(array.count > 0)
+    {
+        NSString *show = [album isEqualToString:@""] ? artist : album;
+        NSDictionary *episodeDictionary = @{ @"title" : title, @"album" : show, @"url" : array[0][@"url"] };
+        
+        rowIndex = [self.episodes indexOfObject:array[0]];
+        [self.episodes replaceObjectAtIndex:rowIndex withObject:episodeDictionary];
+        
+        [self.episodeList reloadData];
     }
 }
 
@@ -204,7 +225,7 @@
     
     if(!array || array.count == 0)
     {
-        NSDictionary *episodeDictionary = @{ @"title" : url.lastPathComponent, @"url" : url };
+        NSDictionary *episodeDictionary = @{ @"title" : url.lastPathComponent, @"album" : url.host, @"url" : url };
         [self.episodes addObject:episodeDictionary];
         [self.episodeList reloadData];
     }
@@ -328,6 +349,10 @@
     if([tableColumn.identifier isEqualToString:@"title"])
     {
         return self.episodes[rowIndex][@"title"];
+    }
+    else if([tableColumn.identifier isEqualToString:@"album"])
+    {
+        return self.episodes[rowIndex][@"album"];
     }
     else if([tableColumn.identifier isEqualToString:@"isPlaying"])
     {
