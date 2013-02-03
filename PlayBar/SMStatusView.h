@@ -25,6 +25,6 @@
 
 @property (nonatomic) BOOL isHighlighted;
 
-- (void)highlight:(NSNumber*)_isHightlighted;
+- (void)highlight:(BOOL)_isHightlighted;
 
 @end

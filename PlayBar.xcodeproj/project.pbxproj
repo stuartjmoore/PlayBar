@@ -26,10 +26,6 @@
 		178C270416BEF47C0013B8E4 /* statusBarIcon-playing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 178C270216BEF47C0013B8E4 /* statusBarIcon-playing@2x.png */; };
 		178C270716BEF53C0013B8E4 /* button-play.png in Resources */ = {isa = PBXBuildFile; fileRef = 178C270516BEF53C0013B8E4 /* button-play.png */; };
 		178C270816BEF53C0013B8E4 /* button-play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 178C270616BEF53C0013B8E4 /* button-play@2x.png */; };
-		178C271216BEFAF50013B8E4 /* ID3Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 178C270C16BEFAF50013B8E4 /* ID3Frame.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		178C271316BEFAF50013B8E4 /* ID3FrameText.m in Sources */ = {isa = PBXBuildFile; fileRef = 178C270E16BEFAF50013B8E4 /* ID3FrameText.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		178C271416BEFAF50013B8E4 /* ID3Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 178C271016BEFAF50013B8E4 /* ID3Parser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		178C271516BEFAF50013B8E4 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 178C271116BEFAF50013B8E4 /* README */; };
 		17AC521B15D5D2A4003956D0 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC521A15D5D2A4003956D0 /* QTKit.framework */; };
 		17C553B315DC131200753DFF /* statusBarIcon-click.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C553B115DC131200753DFF /* statusBarIcon-click.png */; };
 		17C553B415DC131200753DFF /* statusBarIcon-click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */; };
@@ -63,14 +59,6 @@
 		178C270216BEF47C0013B8E4 /* statusBarIcon-playing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-playing@2x.png"; path = "Resources/statusBarIcon-playing@2x.png"; sourceTree = SOURCE_ROOT; };
 		178C270516BEF53C0013B8E4 /* button-play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-play.png"; path = "Resources/button-play.png"; sourceTree = SOURCE_ROOT; };
 		178C270616BEF53C0013B8E4 /* button-play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-play@2x.png"; path = "Resources/button-play@2x.png"; sourceTree = SOURCE_ROOT; };
-		178C270A16BEFAF50013B8E4 /* frameIDALL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frameIDALL.h; sourceTree = "<group>"; };
-		178C270B16BEFAF50013B8E4 /* ID3Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID3Frame.h; sourceTree = "<group>"; };
-		178C270C16BEFAF50013B8E4 /* ID3Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ID3Frame.m; sourceTree = "<group>"; };
-		178C270D16BEFAF50013B8E4 /* ID3FrameText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID3FrameText.h; sourceTree = "<group>"; };
-		178C270E16BEFAF50013B8E4 /* ID3FrameText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ID3FrameText.m; sourceTree = "<group>"; };
-		178C270F16BEFAF50013B8E4 /* ID3Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID3Parser.h; sourceTree = "<group>"; };
-		178C271016BEFAF50013B8E4 /* ID3Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ID3Parser.m; sourceTree = "<group>"; };
-		178C271116BEFAF50013B8E4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		17AC521A15D5D2A4003956D0 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		17C553B115DC131200753DFF /* statusBarIcon-click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-click.png"; path = "Resources/statusBarIcon-click.png"; sourceTree = SOURCE_ROOT; };
 		17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-click@2x.png"; path = "Resources/statusBarIcon-click@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -136,7 +124,6 @@
 				178A4A7E15D855460089E57A /* SMStatusView.m */,
 				1724F7E615D5BBFB00EFE31B /* MainMenu.xib */,
 				1724F7EE15D5BED500EFE31B /* Resources */,
-				178C270916BEFAF50013B8E4 /* id3Parser */,
 				1724F7D815D5BBFB00EFE31B /* Supporting Files */,
 			);
 			path = PlayBar;
@@ -174,21 +161,6 @@
 				178C270216BEF47C0013B8E4 /* statusBarIcon-playing@2x.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		178C270916BEFAF50013B8E4 /* id3Parser */ = {
-			isa = PBXGroup;
-			children = (
-				178C270A16BEFAF50013B8E4 /* frameIDALL.h */,
-				178C270B16BEFAF50013B8E4 /* ID3Frame.h */,
-				178C270C16BEFAF50013B8E4 /* ID3Frame.m */,
-				178C270D16BEFAF50013B8E4 /* ID3FrameText.h */,
-				178C270E16BEFAF50013B8E4 /* ID3FrameText.m */,
-				178C270F16BEFAF50013B8E4 /* ID3Parser.h */,
-				178C271016BEFAF50013B8E4 /* ID3Parser.m */,
-				178C271116BEFAF50013B8E4 /* README */,
-			);
-			path = id3Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +230,6 @@
 				178C270416BEF47C0013B8E4 /* statusBarIcon-playing@2x.png in Resources */,
 				178C270716BEF53C0013B8E4 /* button-play.png in Resources */,
 				178C270816BEF53C0013B8E4 /* button-play@2x.png in Resources */,
-				178C271516BEFAF50013B8E4 /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,9 +243,6 @@
 				1724F7DE15D5BBFB00EFE31B /* main.m in Sources */,
 				1724F7E515D5BBFB00EFE31B /* SMAppDelegate.m in Sources */,
 				178A4A7F15D855460089E57A /* SMStatusView.m in Sources */,
-				178C271216BEFAF50013B8E4 /* ID3Frame.m in Sources */,
-				178C271316BEFAF50013B8E4 /* ID3FrameText.m in Sources */,
-				178C271416BEFAF50013B8E4 /* ID3Parser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

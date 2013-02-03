@@ -42,22 +42,19 @@
             return NSDragOperationNone;
     }
     
-    isHighlighted = YES;
-    [self setNeedsDisplay:YES];
+    [self highlight:YES];
     
     return NSDragOperationCopy;
 }
 
 - (void)draggingExited:(id<NSDraggingInfo>)sender
 {
-    isHighlighted = NO;
-    [self setNeedsDisplay:YES];
+    [self highlight:NO];
 }
 
 - (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
 {
-    isHighlighted = NO;
-    [self setNeedsDisplay:YES];
+    [self highlight:NO];
     
     NSMutableArray *fileURLs = [NSMutableArray array];
     
@@ -97,61 +94,54 @@
         [self.delegate togglePlayPause:nil];
         
         if(isHighlighted)
-            isHighlighted = [self.delegate togglePopover];
+            [self.delegate togglePopover];
         
-        isHighlighted = YES;
-        [self setNeedsDisplay:YES];
-        [self performSelector:@selector(highlight:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.1f];
+        [self highlight:YES];
+        [self performSelector:@selector(highlight:) withObject:@NO afterDelay:0.1f];
         
         return;
     }
     
-    isHighlighted = [self.delegate togglePopover];
-    
-    [self setNeedsDisplay:YES];
+    [self highlight:[self.delegate togglePopover]];
 }
 
 - (void)rightMouseDown:(NSEvent*)event
 {
     if(isHighlighted)
-        isHighlighted = [self.delegate togglePopover];
+        [self.delegate togglePopover];
     
     [self.statusItem.menu setDelegate:self];
     [self.statusItem popUpStatusItemMenu:self.statusItem.menu];
-    [self setNeedsDisplay:YES];
 }
 
-- (void)otherMouseDown:(NSEvent *)event
+- (void)otherMouseDown:(NSEvent*)event
 {
     if(event.buttonNumber == 2)
     {
         [self.delegate togglePlayPause:nil];
         
         if(isHighlighted)
-            isHighlighted = [self.delegate togglePopover];
+            [self.delegate togglePopover];
         
-        isHighlighted = YES;
-        [self setNeedsDisplay:YES];
-        [self performSelector:@selector(highlight:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.1f];
+        [self highlight:YES];
+        [self performSelector:@selector(highlight:) withObject:@NO afterDelay:0.1f];
     }
 }
 
 - (void)menuWillOpen:(NSMenu*)menu
 {
-    isHighlighted = YES;
-    [self setNeedsDisplay:YES];
+    [self highlight:YES];
 }
 
 - (void)menuDidClose:(NSMenu*)menu
 {
-    isHighlighted = NO;
+    [self highlight:NO];
     [self.statusItem.menu setDelegate:nil];
-    [self setNeedsDisplay:YES];
 }
 
-- (void)highlight:(NSNumber*)_isHightlighted
+- (void)highlight:(BOOL)_isHightlighted
 {
-    isHighlighted = _isHightlighted.boolValue;
+    isHighlighted = _isHightlighted;
     [self setNeedsDisplay:YES];
 }
 

@@ -40,6 +40,7 @@
 - (IBAction)closeURLDialog:(NSButton*)sender;
 
 - (void)addURL:(NSURL*)url;
+- (void)playURL:(NSURL*)url;
 
 - (IBAction)togglePlayPause:(id)sender;
 - (IBAction)slideSeekbar:(id)sender;
