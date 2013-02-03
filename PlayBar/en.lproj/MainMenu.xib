@@ -473,9 +473,9 @@
 													</object>
 													<reference key="NSTableView" ref="70559438"/>
 												</object>
-												<object class="NSTableColumn" id="871471772">
+												<object class="NSTableColumn" id="108498756">
 													<string key="NSIdentifier">album</string>
-													<double key="NSWidth">171</double>
+													<double key="NSWidth">108</double>
 													<double key="NSMinWidth">10</double>
 													<double key="NSMaxWidth">3.4028234663852886e+38</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -494,7 +494,7 @@
 														</object>
 														<reference key="NSTextColor" ref="692254195"/>
 													</object>
-													<object class="NSTextFieldCell" key="NSDataCell" id="510863936">
+													<object class="NSTextFieldCell" key="NSDataCell" id="828884327">
 														<int key="NSCellFlags">69206081</int>
 														<int key="NSCellFlags2">6144</int>
 														<string key="NSContents">Text Cell</string>
@@ -510,7 +510,7 @@
 												</object>
 												<object class="NSTableColumn" id="131064147">
 													<string key="NSIdentifier">title</string>
-													<double key="NSWidth">290</double>
+													<double key="NSWidth">353</double>
 													<double key="NSMinWidth">40</double>
 													<double key="NSMaxWidth">1000</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1304,7 +1304,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="131064147"/>
 							<reference ref="625464802"/>
-							<reference ref="871471772"/>
+							<reference ref="108498756"/>
 						</array>
 						<reference key="parent" ref="951164701"/>
 					</object>
@@ -1336,16 +1336,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">661</int>
-						<reference key="object" ref="871471772"/>
+						<reference key="object" ref="108498756"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="510863936"/>
+							<reference ref="828884327"/>
 						</array>
 						<reference key="parent" ref="70559438"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">662</int>
-						<reference key="object" ref="510863936"/>
-						<reference key="parent" ref="871471772"/>
+						<reference key="object" ref="828884327"/>
+						<reference key="parent" ref="108498756"/>
 					</object>
 				</array>
 			</object>
