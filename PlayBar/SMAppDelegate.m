@@ -8,15 +8,9 @@
 
 #import "SMAppDelegate.h"
 
-@implementation SMAppDelegate
+#import "ID3Parser.h"
 
-@synthesize statusItem = _statusItem, statusMenu = _statusMenu;
-@synthesize popover = _popover, openURLWindow = _openURLWindow;
-@synthesize URLField = _URLField;
-@synthesize player = _player, timer = _timer;
-@synthesize timeLabel = _timeLabel;
-@synthesize titleLabel = _titleLabel, albumLabel = _albumLabel, artistLabel = _artistLabel;
-@synthesize seekbar = _seekbar, albumArtView = _albumArtView, playPauseButton = _playPauseButton;
+@implementation SMAppDelegate
 
 - (void)applicationWillFinishLaunching:(NSNotification*)notification
 {
@@ -65,10 +59,11 @@
                                                  name:QTMovieDidEndNotification
                                                object:self.player];
     
-    SMStatusView *view = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, NSStatusBar.systemStatusBar.thickness)];
-    view.statusItem = self.statusItem;
-    view.delegate = self;
-    self.statusItem.view = view;
+    SMStatusView *statusView = [[SMStatusView alloc] initWithFrame:NSMakeRect(0, 0, 22, NSStatusBar.systemStatusBar.thickness)];
+    statusView.image = [NSImage imageNamed:@"statusBarIcon"];
+    statusView.statusItem = self.statusItem;
+    statusView.delegate = self;
+    self.statusItem.view = statusView;
 }
 
 #pragma mark - QTNotifications
@@ -77,7 +72,9 @@
 {
     if(self.player.rate)
     {
-        //self.playPauseButton.title = @"Pause";
+        self.playPauseButton.image = [NSImage imageNamed:@"button-pause"];
+        SMStatusView *statusView = (SMStatusView*)self.statusItem.view;
+        statusView.image = [NSImage imageNamed:@"statusBarIcon-playing"];
         
         [self.timer invalidate];
         self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(updateSlider:) userInfo:nil repeats:YES];
@@ -85,7 +82,9 @@
     }
     else
     {
-        //self.playPauseButton.title = @"Play";
+        self.playPauseButton.image = [NSImage imageNamed:@"button-play"];
+        SMStatusView *statusView = (SMStatusView*)self.statusItem.view;
+        statusView.image = [NSImage imageNamed:@"statusBarIcon"];
         
         [self.timer invalidate];
     }
@@ -100,22 +99,23 @@
     self.seekbar.floatValue = self.player.currentTime.timeValue;
     
     self.albumArtView.image = self.player.posterImage;
-    /*
+    
     NSLog(@"%@", self.player.commonMetadata);
     NSLog(@"%@", self.player.availableMetadataFormats);
     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatID3Metadata"]);
     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeMetadata"]);
     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeUserData"]);
     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatiTunesMetadata"]);
-    */
+    NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.mdta"]);
+    NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.udta"]);
+    
     for(QTMetadataItem *item in self.player.commonMetadata)
     {
-        //NSLog(@"%@", item.key);
-        
         if([(NSString*)item.key isEqualToString:@"title"])
         {
             self.titleLabel.stringValue = item.stringValue;
-            self.statusItem.toolTip = [NSString stringWithFormat:@"PlayBar\n%@", item.stringValue];
+            SMStatusView *statusView = (SMStatusView*)self.statusItem.view;
+            statusView.toolTip = [NSString stringWithFormat:@"PlayBar - %@", item.stringValue];
         }
         else if([(NSString*)item.key isEqualToString:@"albumName"])
             self.albumLabel.stringValue = item.stringValue;
@@ -227,7 +227,7 @@
 - (BOOL)togglePopover
 {
     NSRect frame = [[[NSApp currentEvent] window] frame];
-    NSSize screenSize = [[self.popover screen] frame].size;
+    NSSize screenSize = self.popover.screen.frame.size;
     
     if(self.popover.isVisible)
     {

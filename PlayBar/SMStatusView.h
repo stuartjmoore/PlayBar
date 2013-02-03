@@ -21,6 +21,7 @@
 @property (nonatomic, weak) id<SMAppDelegateDelegate> delegate;
 
 @property (nonatomic, weak) NSStatusItem *statusItem;
+@property (nonatomic, weak) NSImage *image;
 
 @property (nonatomic) BOOL isHighlighted;
 

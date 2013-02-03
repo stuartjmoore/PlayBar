@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
+		<string key="IBDocument.SystemVersion">12C3006</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2843</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -231,10 +231,10 @@
 										<int key="NSButtonFlags2">34</int>
 										<object class="NSCustomResource" key="NSNormalImage">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">button-pause</string>
+											<string key="NSResourceName">button-play</string>
 										</object>
 										<string key="NSAlternateContents"/>
-										<string key="NSKeyEquivalent"/>
+										<string type="base64-UTF8" key="NSKeyEquivalent">IA</string>
 										<int key="NSPeriodicDelay">400</int>
 										<int key="NSPeriodicInterval">75</int>
 									</object>
@@ -602,7 +602,7 @@
 							<string key="NSFrameSize">{492, 138}</string>
 							<reference key="NSSuperview" ref="158405781"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="436003409"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:1192</string>
 							<string key="NSClassName">NSView</string>
 						</object>
@@ -613,7 +613,7 @@
 					<reference key="NSNextKeyView" ref="763185171"/>
 					<string key="NSReuseIdentifierKey">_NS:207</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMinSize">{337, 138}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">NO</bool>
@@ -725,7 +725,7 @@
 					<reference key="NSNextKeyView" ref="714543106"/>
 					<string key="NSReuseIdentifierKey">_NS:20</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMinSize">{222, 122}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">NO</bool>
@@ -1386,7 +1386,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">651</int>
+			<int key="maxID">660</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1395,7 +1395,6 @@
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="closeURLDialog:">NSButton</string>
-						<string key="doubleClickOnTableView:">NSTableView</string>
 						<string key="nextEpisode:">id</string>
 						<string key="openFileDialog:">id</string>
 						<string key="openURLDialog:">id</string>
@@ -1408,10 +1407,6 @@
 						<object class="IBActionInfo" key="closeURLDialog:">
 							<string key="name">closeURLDialog:</string>
 							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBActionInfo" key="doubleClickOnTableView:">
-							<string key="name">doubleClickOnTableView:</string>
-							<string key="candidateClassName">NSTableView</string>
 						</object>
 						<object class="IBActionInfo" key="nextEpisode:">
 							<string key="name">nextEpisode:</string>
@@ -1521,7 +1516,7 @@
 			<string key="NSMenuCheckmark">{11, 11}</string>
 			<string key="NSMenuMixedState">{10, 3}</string>
 			<string key="button-list">{6.5004511722477618, 5.5003817611327221}</string>
-			<string key="button-pause">{5.5003817611327221, 10}</string>
+			<string key="button-play">{9.5006594055928826, 10}</string>
 			<string key="button-skip">{8, 5}</string>
 		</dictionary>
 	</data>

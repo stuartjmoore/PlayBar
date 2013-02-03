@@ -22,6 +22,14 @@
 		173095DF15D8245F00DD7E78 /* statusBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 173095DD15D8245F00DD7E78 /* statusBarIcon.png */; };
 		173095E015D8245F00DD7E78 /* statusBarIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */; };
 		178A4A7F15D855460089E57A /* SMStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 178A4A7E15D855460089E57A /* SMStatusView.m */; };
+		178C270316BEF47C0013B8E4 /* statusBarIcon-playing.png in Resources */ = {isa = PBXBuildFile; fileRef = 178C270116BEF47C0013B8E4 /* statusBarIcon-playing.png */; };
+		178C270416BEF47C0013B8E4 /* statusBarIcon-playing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 178C270216BEF47C0013B8E4 /* statusBarIcon-playing@2x.png */; };
+		178C270716BEF53C0013B8E4 /* button-play.png in Resources */ = {isa = PBXBuildFile; fileRef = 178C270516BEF53C0013B8E4 /* button-play.png */; };
+		178C270816BEF53C0013B8E4 /* button-play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 178C270616BEF53C0013B8E4 /* button-play@2x.png */; };
+		178C271216BEFAF50013B8E4 /* ID3Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 178C270C16BEFAF50013B8E4 /* ID3Frame.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		178C271316BEFAF50013B8E4 /* ID3FrameText.m in Sources */ = {isa = PBXBuildFile; fileRef = 178C270E16BEFAF50013B8E4 /* ID3FrameText.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		178C271416BEFAF50013B8E4 /* ID3Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 178C271016BEFAF50013B8E4 /* ID3Parser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		178C271516BEFAF50013B8E4 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 178C271116BEFAF50013B8E4 /* README */; };
 		17AC521B15D5D2A4003956D0 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC521A15D5D2A4003956D0 /* QTKit.framework */; };
 		17C553B315DC131200753DFF /* statusBarIcon-click.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C553B115DC131200753DFF /* statusBarIcon-click.png */; };
 		17C553B415DC131200753DFF /* statusBarIcon-click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */; };
@@ -51,6 +59,18 @@
 		173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon@2x.png"; path = "Resources/statusBarIcon@2x.png"; sourceTree = SOURCE_ROOT; };
 		178A4A7D15D855460089E57A /* SMStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMStatusView.h; sourceTree = "<group>"; };
 		178A4A7E15D855460089E57A /* SMStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMStatusView.m; sourceTree = "<group>"; };
+		178C270116BEF47C0013B8E4 /* statusBarIcon-playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-playing.png"; path = "Resources/statusBarIcon-playing.png"; sourceTree = SOURCE_ROOT; };
+		178C270216BEF47C0013B8E4 /* statusBarIcon-playing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-playing@2x.png"; path = "Resources/statusBarIcon-playing@2x.png"; sourceTree = SOURCE_ROOT; };
+		178C270516BEF53C0013B8E4 /* button-play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-play.png"; path = "Resources/button-play.png"; sourceTree = SOURCE_ROOT; };
+		178C270616BEF53C0013B8E4 /* button-play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-play@2x.png"; path = "Resources/button-play@2x.png"; sourceTree = SOURCE_ROOT; };
+		178C270A16BEFAF50013B8E4 /* frameIDALL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frameIDALL.h; sourceTree = "<group>"; };
+		178C270B16BEFAF50013B8E4 /* ID3Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID3Frame.h; sourceTree = "<group>"; };
+		178C270C16BEFAF50013B8E4 /* ID3Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ID3Frame.m; sourceTree = "<group>"; };
+		178C270D16BEFAF50013B8E4 /* ID3FrameText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID3FrameText.h; sourceTree = "<group>"; };
+		178C270E16BEFAF50013B8E4 /* ID3FrameText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ID3FrameText.m; sourceTree = "<group>"; };
+		178C270F16BEFAF50013B8E4 /* ID3Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ID3Parser.h; sourceTree = "<group>"; };
+		178C271016BEFAF50013B8E4 /* ID3Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ID3Parser.m; sourceTree = "<group>"; };
+		178C271116BEFAF50013B8E4 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		17AC521A15D5D2A4003956D0 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		17C553B115DC131200753DFF /* statusBarIcon-click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-click.png"; path = "Resources/statusBarIcon-click.png"; sourceTree = SOURCE_ROOT; };
 		17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "statusBarIcon-click@2x.png"; path = "Resources/statusBarIcon-click@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -116,6 +136,7 @@
 				178A4A7E15D855460089E57A /* SMStatusView.m */,
 				1724F7E615D5BBFB00EFE31B /* MainMenu.xib */,
 				1724F7EE15D5BED500EFE31B /* Resources */,
+				178C270916BEFAF50013B8E4 /* id3Parser */,
 				1724F7D815D5BBFB00EFE31B /* Supporting Files */,
 			);
 			path = PlayBar;
@@ -137,6 +158,8 @@
 		1724F7EE15D5BED500EFE31B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				178C270516BEF53C0013B8E4 /* button-play.png */,
+				178C270616BEF53C0013B8E4 /* button-play@2x.png */,
 				171906CC15E390780008E531 /* button-list.png */,
 				17149B8B15E902E200C3343C /* button-list@2x.png */,
 				171906CD15E390780008E531 /* button-pause.png */,
@@ -147,8 +170,25 @@
 				17C553B215DC131200753DFF /* statusBarIcon-click@2x.png */,
 				173095DD15D8245F00DD7E78 /* statusBarIcon.png */,
 				173095DE15D8245F00DD7E78 /* statusBarIcon@2x.png */,
+				178C270116BEF47C0013B8E4 /* statusBarIcon-playing.png */,
+				178C270216BEF47C0013B8E4 /* statusBarIcon-playing@2x.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		178C270916BEFAF50013B8E4 /* id3Parser */ = {
+			isa = PBXGroup;
+			children = (
+				178C270A16BEFAF50013B8E4 /* frameIDALL.h */,
+				178C270B16BEFAF50013B8E4 /* ID3Frame.h */,
+				178C270C16BEFAF50013B8E4 /* ID3Frame.m */,
+				178C270D16BEFAF50013B8E4 /* ID3FrameText.h */,
+				178C270E16BEFAF50013B8E4 /* ID3FrameText.m */,
+				178C270F16BEFAF50013B8E4 /* ID3Parser.h */,
+				178C271016BEFAF50013B8E4 /* ID3Parser.m */,
+				178C271116BEFAF50013B8E4 /* README */,
+			);
+			path = id3Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,7 +217,7 @@
 		1724F7C415D5BBFB00EFE31B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = 1724F7C715D5BBFB00EFE31B /* Build configuration list for PBXProject "PlayBar" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -214,6 +254,11 @@
 				17149B8E15E902E200C3343C /* button-list@2x.png in Resources */,
 				17149B8F15E902E200C3343C /* button-pause@2x.png in Resources */,
 				17149B9015E902E200C3343C /* button-skip@2x.png in Resources */,
+				178C270316BEF47C0013B8E4 /* statusBarIcon-playing.png in Resources */,
+				178C270416BEF47C0013B8E4 /* statusBarIcon-playing@2x.png in Resources */,
+				178C270716BEF53C0013B8E4 /* button-play.png in Resources */,
+				178C270816BEF53C0013B8E4 /* button-play@2x.png in Resources */,
+				178C271516BEFAF50013B8E4 /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +272,9 @@
 				1724F7DE15D5BBFB00EFE31B /* main.m in Sources */,
 				1724F7E515D5BBFB00EFE31B /* SMAppDelegate.m in Sources */,
 				178A4A7F15D855460089E57A /* SMStatusView.m in Sources */,
+				178C271216BEFAF50013B8E4 /* ID3Frame.m in Sources */,
+				178C271316BEFAF50013B8E4 /* ID3FrameText.m in Sources */,
+				178C271416BEFAF50013B8E4 /* ID3Parser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +314,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -280,6 +332,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -293,6 +346,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -301,6 +358,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;

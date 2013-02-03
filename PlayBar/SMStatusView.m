@@ -10,7 +10,6 @@
 
 @implementation SMStatusView
 
-@synthesize statusItem = _statusItem;
 @synthesize isHighlighted;
 
 - (id)initWithFrame:(NSRect)frame
@@ -156,11 +155,17 @@
     [self setNeedsDisplay:YES];
 }
 
+- (void)setImage:(NSImage*)image
+{
+    _image = image;
+    [self setNeedsDisplay:YES];
+}
+
 - (void)drawRect:(NSRect)rect
 {
     [self.statusItem drawStatusBarBackgroundInRect:self.bounds withHighlight:isHighlighted];
     
-    NSImage *image = isHighlighted?[NSImage imageNamed:@"statusBarIcon-click"]:[NSImage imageNamed:@"statusBarIcon"];
+    NSImage *image = isHighlighted?[NSImage imageNamed:@"statusBarIcon-click"]:self.image;
     [image drawInRect:self.bounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
 }
 
