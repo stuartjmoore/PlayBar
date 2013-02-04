@@ -156,13 +156,14 @@
 
 - (void)updateSlider:(id)timer
 {
-    self.seekbar.minValue = 0;
-    self.seekbar.maxValue = self.player.duration.timeValue;
-    self.seekbar.floatValue = self.player.currentTime.timeValue;
-    
     NSTimeInterval currentTime, duration;
     QTGetTimeInterval(self.player.currentTime, &currentTime);
     QTGetTimeInterval(self.player.duration, &duration);
+    
+    self.seekbar.minValue = 0;
+    self.seekbar.floatValue = currentTime;
+    self.seekbar.maxValue = duration;
+    
     float timeRemaining = duration-currentTime;
     int hours = timeRemaining/60/60;
     int minutes = timeRemaining/60 - 60*hours;
@@ -248,11 +249,11 @@
     
     self.albumArtView.image = nil;
     
-    NSNumber *currentTimeValue = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
-    QTTime currentTime = QTMakeTime(currentTimeValue.longLongValue, 1);
+    //NSNumber *currentTimeValue = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
+    //QTTime currentTime = QTMakeTime(currentTimeValue.longLongValue, 1);
     
     NSDictionary *attr = @{ QTMovieURLAttribute : url,
-                            QTMovieCurrentTimeAttribute : [NSValue valueWithQTTime:currentTime],
+                            //QTMovieCurrentTimeAttribute : [NSValue valueWithQTTime:currentTime],
                             QTMovieOpenForPlaybackAttribute : @YES
                           };
     
@@ -280,7 +281,7 @@
 
 - (IBAction)slideSeekbar:(id)sender
 {
-    self.player.currentTime = QTMakeTime(self.seekbar.floatValue, self.player.duration.timeScale);
+    self.player.currentTime = QTMakeTimeWithTimeInterval(self.seekbar.floatValue);
 }
 
 - (IBAction)nextEpisode:(id)sender
