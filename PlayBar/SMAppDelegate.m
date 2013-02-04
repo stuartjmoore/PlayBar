@@ -78,6 +78,7 @@
     
     self.albumArtView.image = self.player.posterImage;
     
+    /*
      NSLog(@"%@", self.player.commonMetadata);
      NSLog(@"%@", self.player.availableMetadataFormats);
      NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatID3Metadata"]);
@@ -86,7 +87,7 @@
      NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatiTunesMetadata"]);
      NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.mdta"]);
      NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.udta"]);
-     
+    */
     
     NSString *title, *artist = @"", *album;
     NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
