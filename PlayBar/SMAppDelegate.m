@@ -77,7 +77,7 @@
     self.seekbar.floatValue = self.player.currentTime.timeValue;
     
     self.albumArtView.image = self.player.posterImage;
-    /*
+    
      NSLog(@"%@", self.player.commonMetadata);
      NSLog(@"%@", self.player.availableMetadataFormats);
      NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatID3Metadata"]);
@@ -86,9 +86,10 @@
      NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatiTunesMetadata"]);
      NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.mdta"]);
      NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.udta"]);
-     */
+     
     
-    NSString *title = @"", *artist = @"", *album = @"";
+    NSString *title, *artist = @"", *album;
+    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
     
     for(QTMetadataItem *item in self.player.commonMetadata)
     {
@@ -100,6 +101,9 @@
             artist = item.stringValue;
     }
     
+    title = title ?: playingURL.lastPathComponent;
+    album = album ?: playingURL.host;
+    
     self.titleLabel.stringValue = title;
     ((SMStatusView*)self.statusItem.view).toolTip = [NSString stringWithFormat:@"PlayBar - %@", title];
     self.albumLabel.stringValue = album;
@@ -107,7 +111,6 @@
 
     
     NSInteger rowIndex = 0;
-    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", playingURL];
     NSArray *array = [self.episodes filteredArrayUsingPredicate:predicate];
     
@@ -244,15 +247,23 @@
     
     self.albumArtView.image = nil;
     
-    QTMovie *file = [QTMovie movieWithURL:url error:nil];
+    NSNumber *currentTimeValue = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
+    QTTime currentTime = QTMakeTime(currentTimeValue.longLongValue, 1);
+    
+    NSDictionary *attr = @{ QTMovieURLAttribute : url,
+                            QTMovieCurrentTimeAttribute : [NSValue valueWithQTTime:currentTime],
+                            QTMovieOpenForPlaybackAttribute : @YES
+                          };
+    
+    QTMovie *file = [QTMovie movieWithAttributes:attr error:nil];
     
     if(file)
     {
         self.player = file;
         [self.player autoplay];
-        
-        NSNumber *currentTime = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
-        self.player.currentTime = QTMakeTime(currentTime.longLongValue, self.player.duration.timeScale);
+
+//        NSNumber *currentTime = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
+//        self.player.currentTime = QTMakeTime(currentTime.longLongValue, self.player.duration.timeScale);
     }
 }
 
