@@ -72,58 +72,81 @@
 
 - (void)movieLoaded:(NSNotification*)notification
 {
-    self.seekbar.minValue = 0;
-    self.seekbar.maxValue = self.player.duration.timeValue;
-    self.seekbar.floatValue = self.player.currentTime.timeValue;
+    NSLog(@"%@", notification);
+    NSLog(@"%@", [self.player attributeForKey:QTMovieLoadStateAttribute]);
     
-    self.albumArtView.image = self.player.posterImage;
-    
-    /*
-     NSLog(@"%@", self.player.commonMetadata);
-     NSLog(@"%@", self.player.availableMetadataFormats);
-     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatID3Metadata"]);
-     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeMetadata"]);
-     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeUserData"]);
-     NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatiTunesMetadata"]);
-     NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.mdta"]);
-     NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.udta"]);
-    */
-    
-    NSString *title, *artist = @"", *album;
-    NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
-    
-    for(QTMetadataItem *item in self.player.commonMetadata)
+    if([[self.player attributeForKey:QTMovieLoadStateAttribute] longValue] == QTMovieLoadStatePlaythroughOK)
     {
-        if([(NSString*)item.key isEqualToString:@"title"])
-            title = item.stringValue;
-        else if([(NSString*)item.key isEqualToString:@"albumName"])
-            album = item.stringValue;
-        else if([(NSString*)item.key isEqualToString:@"artist"])
-            artist = item.stringValue;
-    }
-    
-    title = title ?: playingURL.lastPathComponent;
-    album = album ?: playingURL.host;
-    
-    self.titleLabel.stringValue = title;
-    ((SMStatusView*)self.statusItem.view).toolTip = [NSString stringWithFormat:@"PlayBar - %@", title];
-    self.albumLabel.stringValue = album;
-    self.artistLabel.stringValue = artist;
-
-    
-    NSInteger rowIndex = 0;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", playingURL];
-    NSArray *array = [self.episodes filteredArrayUsingPredicate:predicate];
-    
-    if(array.count > 0)
-    {
-        NSString *show = [album isEqualToString:@""] ? artist : album;
-        NSDictionary *episodeDictionary = @{ @"title" : title, @"album" : show, @"url" : array[0][@"url"] };
+        NSString *title, *artist = @"", *album;
+        NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
         
-        rowIndex = [self.episodes indexOfObject:array[0]];
-        [self.episodes replaceObjectAtIndex:rowIndex withObject:episodeDictionary];
+        /*
+        NSLog(@"%@", self.player);
+        NSLog(@"%@", QTStringFromTime(self.player.currentTime));
         
-        [self.episodeList reloadData];
+        NSTimeInterval savedTime = [[NSUserDefaults.standardUserDefaults objectForKey:playingURL.absoluteString] doubleValue];
+        QTTime time = QTMakeTimeWithTimeInterval(savedTime);
+        
+        NSLog(@"%f", savedTime);
+        NSLog(@"%@", QTStringFromTime(time));
+        
+        [self.player setCurrentTime:time];
+    
+        NSLog(@"%@", QTStringFromTime(self.player.currentTime));
+        
+        //[self.player autoplay];
+        
+        NSLog(@"%@", QTStringFromTime(self.player.currentTime));
+        */
+        
+        [self updateSlider:nil];
+        
+        self.albumArtView.image = self.player.posterImage;
+        
+        /*
+         NSLog(@"%@", self.player.commonMetadata);
+         NSLog(@"%@", self.player.availableMetadataFormats);
+         NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatID3Metadata"]);
+         NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeMetadata"]);
+         NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatQuickTimeUserData"]);
+         NSLog(@"%@", [self.player metadataForFormat:@"QTMetadataFormatiTunesMetadata"]);
+         NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.mdta"]);
+         NSLog(@"%@", [self.player metadataForFormat:@"com.apple.quicktime.udta"]);
+         */
+        
+        for(QTMetadataItem *item in self.player.commonMetadata)
+        {
+            if([(NSString*)item.key isEqualToString:@"title"])
+                title = item.stringValue;
+            else if([(NSString*)item.key isEqualToString:@"albumName"])
+                album = item.stringValue;
+            else if([(NSString*)item.key isEqualToString:@"artist"])
+                artist = item.stringValue;
+        }
+        
+        title = title ?: playingURL.lastPathComponent;
+        album = album ?: playingURL.host;
+        
+        self.titleLabel.stringValue = title;
+        ((SMStatusView*)self.statusItem.view).toolTip = [NSString stringWithFormat:@"PlayBar - %@", title];
+        self.albumLabel.stringValue = album;
+        self.artistLabel.stringValue = artist;
+        
+        
+        NSInteger rowIndex = 0;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"url == %@", playingURL];
+        NSArray *array = [self.episodes filteredArrayUsingPredicate:predicate];
+        
+        if(array.count > 0)
+        {
+            NSString *show = [album isEqualToString:@""] ? artist : album;
+            NSDictionary *episodeDictionary = @{ @"title" : title, @"album" : show, @"url" : array[0][@"url"] };
+            
+            rowIndex = [self.episodes indexOfObject:array[0]];
+            [self.episodes replaceObjectAtIndex:rowIndex withObject:episodeDictionary];
+            
+            [self.episodeList reloadData];
+        }
     }
 }
 
@@ -249,23 +272,27 @@
     
     self.albumArtView.image = nil;
     
-    //NSNumber *currentTimeValue = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
-    //QTTime currentTime = QTMakeTime(currentTimeValue.longLongValue, 1);
+    NSTimeInterval savedTime = [[NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString] doubleValue];
+    QTTime time = QTMakeTimeWithTimeInterval(savedTime);
     
     NSDictionary *attr = @{ QTMovieURLAttribute : url,
-                            //QTMovieCurrentTimeAttribute : [NSValue valueWithQTTime:currentTime],
+                            QTMovieCurrentTimeAttribute : [NSValue valueWithQTTime:time],
                             QTMovieOpenForPlaybackAttribute : @YES
                           };
     
     QTMovie *file = [QTMovie movieWithAttributes:attr error:nil];
     
+    //self.player = [[QTMovie alloc] initWithMovie:file timeRange:QTMakeTimeRange(time, time) error:nil];
+    
     if(file)
     {
+        NSLog(@"%@", QTStringFromTime(time));
+        
         self.player = file;
+        [self.player setCurrentTime:time];
         [self.player autoplay];
-
-//        NSNumber *currentTime = [NSUserDefaults.standardUserDefaults objectForKey:url.absoluteString];
-//        self.player.currentTime = QTMakeTime(currentTime.longLongValue, self.player.duration.timeScale);
+        
+        NSLog(@"%@", QTStringFromTime(self.player.currentTime));
     }
 }
 
@@ -282,6 +309,7 @@
 - (IBAction)slideSeekbar:(id)sender
 {
     self.player.currentTime = QTMakeTimeWithTimeInterval(self.seekbar.floatValue);
+    [self updateSlider:nil];
 }
 
 - (IBAction)nextEpisode:(id)sender
@@ -333,7 +361,6 @@
 - (void)saveState
 {
     NSURL *playingURL = [self.player attributeForKey:@"QTMovieURLAttribute"];
-    NSNumber *playingTime = [NSNumber numberWithLongLong:self.player.currentTime.timeValue];
     
     if(playingURL)
     {
@@ -341,10 +368,13 @@
         QTGetTimeInterval(self.player.currentTime, &currentTime);
         QTGetTimeInterval(self.player.duration, &duration);
         
+        NSLog(@"%f", currentTime);
+        NSLog(@"%@", QTStringFromTime(self.player.currentTime));
+        
         if(currentTime > duration*0.8f)
             [NSUserDefaults.standardUserDefaults removeObjectForKey:playingURL.absoluteString];
         else
-            [NSUserDefaults.standardUserDefaults setObject:playingTime forKey:playingURL.absoluteString];
+            [NSUserDefaults.standardUserDefaults setObject:@(currentTime) forKey:playingURL.absoluteString];
         
         [NSUserDefaults.standardUserDefaults synchronize];
     }
