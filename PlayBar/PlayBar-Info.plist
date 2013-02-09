@@ -50,7 +50,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2012 __MyCompanyName__. All rights reserved.</string>
+	<string>Copyright © 2012-2013 Stuart Moore.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
