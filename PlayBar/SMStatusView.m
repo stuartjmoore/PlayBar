@@ -17,13 +17,14 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        [self registerForDraggedTypes:[NSArray arrayWithObjects:
-                                       NSFilenamesPboardType,
-                                       NSURLPboardType,
-                                       NSStringPboardType, nil]];
+        [self registerForDraggedTypes:@[NSFilenamesPboardType,
+                                        NSURLPboardType,
+                                        NSStringPboardType]];
     }
     return self;
 }
+
+#pragma mark - Drag & Drop
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
 {
@@ -82,28 +83,25 @@
     return YES;
 }
 
+#pragma mark - Click, Control Click, & Alt Click
+
 - (void)mouseDown:(NSEvent*)event
 {
     if(event.modifierFlags & NSControlKeyMask)
-    {
         [self rightMouseDown:nil];
-        return;
-    }
     else if(event.modifierFlags & NSAlternateKeyMask)
-    {
-        [self.delegate togglePlayPause:nil];
-        
-        if(isHighlighted)
-            [self.delegate togglePopover];
-        
-        [self highlight:YES];
-        [self performSelector:@selector(highlight:) withObject:@NO afterDelay:0.1f];
-        
-        return;
-    }
-    
-    [self highlight:[self.delegate togglePopover]];
+        [self otherMouseDown:nil];
+    else
+        [self highlight:[self.delegate togglePopover]];
 }
+
+- (void)mouseUp:(NSEvent*)event
+{
+    if(event.modifierFlags & NSAlternateKeyMask)
+        [self otherMouseUp:nil];
+}
+
+#pragma mark - Right Click
 
 - (void)rightMouseDown:(NSEvent*)event
 {
@@ -112,20 +110,6 @@
     
     [self.statusItem.menu setDelegate:self];
     [self.statusItem popUpStatusItemMenu:self.statusItem.menu];
-}
-
-- (void)otherMouseDown:(NSEvent*)event
-{
-    if(event.buttonNumber == 2)
-    {
-        [self.delegate togglePlayPause:nil];
-        
-        if(isHighlighted)
-            [self.delegate togglePopover];
-        
-        [self highlight:YES];
-        [self performSelector:@selector(highlight:) withObject:@NO afterDelay:0.1f];
-    }
 }
 
 - (void)menuWillOpen:(NSMenu*)menu
@@ -138,6 +122,28 @@
     [self highlight:NO];
     [self.statusItem.menu setDelegate:nil];
 }
+
+#pragma mark - Middle Click
+
+- (void)otherMouseDown:(NSEvent*)event
+{
+    if(event.buttonNumber == 2 || event == nil)
+    {
+        [self.delegate togglePlayPause:nil];
+        
+        if(isHighlighted)
+            [self.delegate togglePopover];
+        
+        [self highlight:YES];
+    }
+}
+
+- (void)otherMouseUp:(NSEvent*)theEvent
+{
+    [self highlight:NO];
+}
+
+#pragma mark - Draw
 
 - (void)highlight:(BOOL)_isHightlighted
 {
