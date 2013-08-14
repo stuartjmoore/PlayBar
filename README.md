@@ -8,10 +8,6 @@ PlayBar is a simple way to stream and queue MP3 files. It was designed for the p
 
 You can download and open MP3s directly or drag a URL to the icon to have it stream directly. If a podcast is playing, PlayBar will queue the next one up.
 
-Clicking the icon brings up the window, right-clicking brings up the menu, and middle-clicking pauses the episode.
-
-# What's needed?
-
-The design is a little lacking. It has some polish, but the text parsing is very, very poor. The title doesn't show up 50% of the time, and the playlist shows a confusing URL.
+Clicking the menubar icon brings up the window, right-clicking brings up the menu, and middle-clicking pauses the episode.
 
 ![](https://raw.github.com/stuartjmoore/PlayBar/master/screenshot-open.png)
